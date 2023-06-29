@@ -12,19 +12,14 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: eks-charts
-        # namespace: flux-system
   install:
-    # createNamespace: true
     crds: CreateReplace
   upgrade:
     crds: CreateReplace
   values:
-    # values replaced with values on ConfigMap external-config-data
     serviceAccount:
       create: false
       name: sa-aws-load-balancer-controller
     region: us-west-2
     clusterName: eks-fluxcd-lab
   interval: 1m0s
-  # releaseName: aws-load-balancer-controller
-  # targetNamespace: kube-system
