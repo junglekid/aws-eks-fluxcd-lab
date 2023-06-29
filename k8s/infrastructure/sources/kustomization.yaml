@@ -3,5 +3,6 @@ kind: Kustomization
 namespace: flux-system
 resources: 
   - eks-charts.yaml
+  - external-dns.yaml
   - metrics-server.yaml
   - weave-gitops.yaml
