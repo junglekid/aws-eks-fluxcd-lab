@@ -17,7 +17,6 @@ spec:
     createNamespace: true
     crds: CreateReplace
   upgrade:
-    createNamespace: true
     crds: CreateReplace
   values:
     # values replaced with values on ConfigMap external-config-data
