@@ -38,4 +38,4 @@ spec:
       create: true
       passwordHash: $2a$10$QqiBstAApThLhm/B10k8cO3bzPDmaCVcKj6RY1ghio5Ot163rWaYS
       username: admin
-
+    replicaCount: 2
