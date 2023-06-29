@@ -55,3 +55,6 @@ spec:
         external-dns.alpha.kubernetes.io/hostname: eks-fluxcd-lab-ui.bsisandbox.com
       hosts:
       - host: eks-fluxcd-lab-ui.bsisandbox.com
+        paths:
+        - path: /
+          pathType: Prefix
