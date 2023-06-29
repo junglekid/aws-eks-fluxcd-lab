@@ -23,7 +23,7 @@ spec:
       name: sa-external-dns
     region: us-west-2
     clusterName: eks-fluxcd-lab
-    domainFilters: bsisandbox.com
+    domainFilters: ["bsisandbox.com"]
   interval: 2m0s
   releaseName: external-dns
   targetNamespace: kube-system
