@@ -13,5 +13,5 @@ spec:
         kind: HelmRepository
         name: metrics-server
   interval: 60m
-  releaseName: metrics-server
-  targetNamespace: cluster-addons
+  # releaseName: metrics-server
+  # targetNamespace: cluster-addons
