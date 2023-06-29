@@ -27,4 +27,4 @@ spec:
     clusterName: eks-fluxcd-lab
   interval: 1m0s
   releaseName: aws-load-balancer-controller
-  targetNamespace: cluster-addons
+  targetNamespace: kube-system
