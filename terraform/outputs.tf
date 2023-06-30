@@ -3,15 +3,15 @@
 #   value = "https://${local.custom_domain_name}"
 # }
 
-# # Output AWS Region
-# output "aws_region" {
-#   value = local.aws_region
-# }
+# Output AWS Region
+output "aws_region" {
+  value = local.aws_region
+}
 
-# # Output EKS Cluster Name
-# output "eks_cluster_name" {
-#   value = module.eks.cluster_name
-# }
+# Output EKS Cluster Name
+output "eks_cluster_name" {
+  value = module.eks.cluster_name
+}
 
 # # Output ECR Repo
 # output "ecr_repo_url" {
