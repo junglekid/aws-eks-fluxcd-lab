@@ -48,4 +48,7 @@ plan.out
 .DS_Store
 
 # Ignore backup folder
-backup/*
+**/backup/*
+color/*
+images/*
+charts/*
