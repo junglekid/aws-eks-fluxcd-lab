@@ -34,20 +34,20 @@ spec:
   path: ./k8s/apps/base
   prune: true
   wait: true
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: apps-configs
-  namespace: flux-system
-spec:
-  dependsOn:
-    - name: apps-addons
-  interval: 10m0s
-  retryInterval: 1m0s
-  timeout: 5m0s
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-  path: ./k8s/apps/configs
-  prune: true
+# ---
+# apiVersion: kustomize.toolkit.fluxcd.io/v1
+# kind: Kustomization
+# metadata:
+#   name: apps-configs
+#   namespace: flux-system
+# spec:
+#   dependsOn:
+#     - name: apps-addons
+#   interval: 10m0s
+#   retryInterval: 1m0s
+#   timeout: 5m0s
+#   sourceRef:
+#     kind: GitRepository
+#     name: flux-system
+#   path: ./k8s/apps/configs
+#   prune: true
