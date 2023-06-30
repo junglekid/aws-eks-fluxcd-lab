@@ -5,4 +5,3 @@ resources:
   - eks-charts.yaml
   - external-dns.yaml
   - metrics-server.yaml
-  - weave-gitops.yaml
