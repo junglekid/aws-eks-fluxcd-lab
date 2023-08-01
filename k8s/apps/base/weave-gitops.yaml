@@ -22,18 +22,11 @@ spec:
     resources:
       requests:
         cpu: 100m
-        memory: 64Mi
+        memory: 128Mi
       limits:
         cpu: 1
         memory: 512Mi
-    securityContext:
-      capabilities:
-        drop:
-          - ALL
-      readOnlyRootFilesystem: true
-      runAsNonRoot: true
-      runAsUser: 1000
-    replicaCount: 2
+    replicaCount: 1
     adminUser:
       create: true
       username: admin
