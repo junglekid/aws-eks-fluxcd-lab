@@ -22,7 +22,7 @@ spec:
       create: false
       name: sa-aws-load-balancer-controller
     region: us-west-2
-    clusterName: eks-weave-gitops-lab
+    clusterName: eks-fluxcd-lab
   interval: 2m0s
   releaseName: aws-load-balancer-controller
   targetNamespace: kube-system

@@ -22,7 +22,7 @@ spec:
       create: false
       name: sa-external-dns
     region: us-west-2
-    clusterName: eks-weave-gitops-lab
+    clusterName: eks-fluxcd-lab
     domainFilters: ["bsisandbox.com"]
   interval: 2m0s
   releaseName: external-dns
