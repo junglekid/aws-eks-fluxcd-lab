@@ -23,6 +23,11 @@ output "flux_acm_certificate_arn" {
   value = aws_acm_certificate_validation.weave_gitops.certificate_arn
 }
 
+# Output ACM Certificate ARN 
+output "podinfo_acm_certificate_arn" {
+  value = aws_acm_certificate_validation.podinfo.certificate_arn
+}
+
 # # Output Color Custom Domain Name
 # output "color_dns_name" {
 #   value = local.custom_domain_name
