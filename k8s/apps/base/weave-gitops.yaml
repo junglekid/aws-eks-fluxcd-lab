@@ -33,7 +33,7 @@ spec:
       readOnlyRootFilesystem: true
       runAsNonRoot: true
       runAsUser: 1000
-    replicaCount: 1
+    replicaCount: 2
     adminUser:
       create: true
       username: admin
