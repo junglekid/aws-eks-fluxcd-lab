@@ -33,7 +33,7 @@ spec:
       readOnlyRootFilesystem: true
       runAsNonRoot: true
       runAsUser: 1000
-    replicaCount: 2
+    replicaCount: 1
     adminUser:
       create: true
       username: admin
@@ -41,7 +41,7 @@ spec:
       # https://docs.gitops.weave.works/docs/configuration/securing-access-to-the-dashboard/#login-via-a-cluster-user-account
       # bcrypt hash for password "flux"
       # passwordHash: "$2a$10$P/tHQ1DNFXdvX0zRGA8LPeSOyb0JXq9rP3fZ4W8HGTpLV7qHDlWhe"
-      passwordHash: $2a$10$KbmYmDZ72GtgtVWX3zwrhu8kWt2S2R9IR09cbMJkZrw0Wk01jvtK.
+      passwordHash: $2a$10$YxYOB4k7Myz1BVvSwkJrDeq7eJWEJZPJVFURgZEBZrOgjzfznlkwG
     ingress:
       enabled: true
       className: "alb"
