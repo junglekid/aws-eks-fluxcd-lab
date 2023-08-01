@@ -41,7 +41,7 @@ spec:
       # https://docs.gitops.weave.works/docs/configuration/securing-access-to-the-dashboard/#login-via-a-cluster-user-account
       # bcrypt hash for password "flux"
       # passwordHash: "$2a$10$P/tHQ1DNFXdvX0zRGA8LPeSOyb0JXq9rP3fZ4W8HGTpLV7qHDlWhe"
-      passwordHash: "$2a$10$hVRD51/IOdb9MKOm/qJR6OtJpvw6odQjtlnzH9YHBFSDWUOZe4Cf6"
+      passwordHash: "$2a$10$RLvktb6dp070CHUK7KEn2Oq2L/cAyEkxJzCR2V7HHajUqi5GpWLaO"
     ingress:
       enabled: true
       className: "alb"
