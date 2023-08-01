@@ -5,7 +5,7 @@ metadata:
   name: weave-gitops
   namespace: flux-system
   annotations:
-    metadata.weave.works/description: This is the Weave GitOps Dashboard.  It provides
+    metadata.weave.works/description: This is the Weave GitOps Dashboard. It provides
       a simple way to get insights into your GitOps workloads.
 spec:
   interval: 60m
@@ -33,7 +33,7 @@ spec:
       readOnlyRootFilesystem: true
       runAsNonRoot: true
       runAsUser: 1000
-    # replicaCount: 2
+    replicaCount: 2
     adminUser:
       create: true
       username: admin
