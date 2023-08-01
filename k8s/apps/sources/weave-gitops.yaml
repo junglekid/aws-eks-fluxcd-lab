@@ -9,5 +9,5 @@ metadata:
       Dashboard's helm chart.
 spec:
   type: oci
-  interval: 60m0s
+  interval: 5m0s
   url: oci://ghcr.io/weaveworks/charts
