@@ -35,7 +35,7 @@ spec:
       # bcrypt hash for password "flux"
       # passwordHash: "$2a$10$P/tHQ1DNFXdvX0zRGA8LPeSOyb0JXq9rP3fZ4W8HGTpLV7qHDlWhe"
       # passwordHash: $2a$10$KrkUBddpFLM5Q4GlYNvOhu1NvxLqfY3tMIer6rQp3nSAA4OAVT18i
-      passwordHash: $2a$10$3BXFjttPc.0LV0zSXm/xJ.0KH4oEXMwFhbULMizv2yxZ4uFXAzOsO
+      passwordHash: $2a$10$exu3ZSVC0NE0mqWVpBQeKeh0FPReHh1AhSzmT/Xd0EgDenHwnOtFi
     ingress:
       enabled: true
       className: "alb"
