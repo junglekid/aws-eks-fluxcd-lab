@@ -19,7 +19,7 @@ spec:
     crds: CreateReplace
   values:
     serviceAccount:
-      create: false 
+      create: false
       name: SA_ALB_NAME
     region: AWS_REGION
     clusterName: EKS_CLUSTER_NAME
