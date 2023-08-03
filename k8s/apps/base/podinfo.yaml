@@ -21,6 +21,10 @@ spec:
       limits:
         memory: 512Mi
     replicaCount: 4
+    ui:
+      color: "#006600"
+      message: "Hello World!!!"
+      logo: ""
     ingress:
       enabled: true
       className: "alb"
@@ -38,10 +42,6 @@ spec:
         paths:
         - path: /
           pathType: Prefix
-      ui:
-        color: "#006600"
-        message: "Hello World!!!"
-        logo: ""
   interval: 10m0s
   releaseName: podinfo
   targetNamespace: default
