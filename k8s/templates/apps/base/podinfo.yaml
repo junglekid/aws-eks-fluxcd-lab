@@ -20,7 +20,7 @@ spec:
         memory: 128Mi
       limits:
         memory: 512Mi
-    replicaCount: 2
+    replicaCount: 6
     ingress:
       enabled: true
       className: "alb"
