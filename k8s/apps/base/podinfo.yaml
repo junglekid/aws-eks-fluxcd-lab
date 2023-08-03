@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: podinfo
-      version: ">6.0.0"
+      version: ">=1.0.0-alpha"
       sourceRef:
         kind: HelmRepository
         name: podinfo
@@ -22,9 +22,9 @@ spec:
         memory: 512Mi
     replicaCount: 4
     ui:
-      color: "#006600"
-      message: "Hello World!!!"
-      logo: ""
+      # color: "#006600"
+      # message: "Hello World!!!"
+      # logo: ""
     ingress:
       enabled: true
       className: "alb"
