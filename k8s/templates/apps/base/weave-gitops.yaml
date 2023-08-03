@@ -8,7 +8,7 @@ metadata:
     metadata.weave.works/description: This is the Weave GitOps Dashboard. It provides
       a simple way to get insights into your GitOps workloads.
 spec:
-  interval: 60m
+  interval: 60m0s
   chart:
     spec:
       chart: weave-gitops
@@ -35,7 +35,8 @@ spec:
       # bcrypt hash for password "flux"
       # passwordHash: "$2a$10$P/tHQ1DNFXdvX0zRGA8LPeSOyb0JXq9rP3fZ4W8HGTpLV7qHDlWhe"
       # passwordHash: $2a$10$KrkUBddpFLM5Q4GlYNvOhu1NvxLqfY3tMIer6rQp3nSAA4OAVT18i
-      passwordHash: WEAVE_GITOPS_PASSWORD_HASH
+      # passwordHash: WEAVE_GITOPS_PASSWORD_HASH
+      passwordHash: $2a$10$z6BEJcTqCTgxlYr3YLOwo.TO4PhKPHagHWNVDItGwfyuJa/2EfM3K
     ingress:
       enabled: true
       className: "alb"
