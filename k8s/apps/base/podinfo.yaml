@@ -21,10 +21,6 @@ spec:
       limits:
         memory: 512Mi
     replicaCount: 4
-    ui:
-      # color: "#006600"
-      # message: "Hello World!!!"
-      # logo: ""
     ingress:
       enabled: true
       className: "alb"
