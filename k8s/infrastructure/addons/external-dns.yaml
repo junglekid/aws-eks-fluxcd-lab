@@ -25,8 +25,8 @@ spec:
         eks.amazonaws.com/role-arn: arn:aws:iam::704855531002:role/eks-fluxcd-lab-external-dns
     region: us-west-2
     clusterName: eks-fluxcd-lab
-    domainFilters: ["bsisandbox.com"]
-    policy: upsert-only
+    domainFilters: ["dallin.brewsentry.com"]
+    policy: sync
   interval: 2m0s
   releaseName: external-dns
   targetNamespace: kube-system
