@@ -19,13 +19,15 @@ spec:
     crds: CreateReplace
   values:
     autoDiscovery:
-      clusterName: EKS_CLUSTER_NAME
+      clusterName: eks-fluxcd-lab
+    awsRegion: us-west-2
+    cloudProvider: aws
     rbac:
       serviceAccount:
-        create: false
-        name: sa-cluster-autoscaler
-    awsRegion: AWS_REGION
-    cloudProvider: aws
+        create: true
+        name: SA_CLUSTER_AUTOSCALER_NAME
+        annotations:
+          eks.amazonaws.com/role-arn: arn:aws:iam::704855531002:role/eks-fluxcd-lab-cluster-autoscaler
     replicaCount: 2
   interval: 2m0s
   releaseName: cluster-autoscaler

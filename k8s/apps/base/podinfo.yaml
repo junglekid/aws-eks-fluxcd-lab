@@ -20,14 +20,14 @@ spec:
         memory: 128Mi
       limits:
         memory: 512Mi
-    replicaCount: 3
+    replicaCount: 6
     ingress:
       enabled: true
       className: "alb"
       annotations:
         alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig":
           { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
-        alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:us-west-2:704855531002:certificate/c140423c-696b-4a34-9361-5e8fccc43e66"
+        alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:us-west-2:704855531002:certificate/63acaef8-6966-4aa3-920e-7650dbb0b9b7"
         alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
         alb.ingress.kubernetes.io/scheme: internet-facing
         alb.ingress.kubernetes.io/ssl-redirect: "443"
