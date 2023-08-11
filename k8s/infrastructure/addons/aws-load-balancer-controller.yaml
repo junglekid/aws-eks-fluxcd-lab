@@ -19,10 +19,8 @@ spec:
     crds: CreateReplace
   values:
     serviceAccount:
-      create: true
-      name: aws-load-balancer-controller
-      annotations:
-        eks.amazonaws.com/role-arn: arn:aws:iam::704855531002:role/eks-fluxcd-lab-load-balancer-controller
+      create: false
+      name: sa-aws-load-balancer-controller
     region: us-west-2
     clusterName: eks-fluxcd-lab
   interval: 2m0s
