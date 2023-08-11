@@ -19,8 +19,10 @@ spec:
     crds: CreateReplace
   values:
     serviceAccount:
-      create: false
+      create: true
       name: SA_ALB_NAME
+      annotations:
+        eks.amazonaws.com/role-arn: SA_ALB_IAM_ROLE_ARN
     region: AWS_REGION
     clusterName: EKS_CLUSTER_NAME
   interval: 2m0s

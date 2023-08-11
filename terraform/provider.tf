@@ -1,10 +1,10 @@
 terraform {
 
   backend "s3" {
-    bucket         = "dallin-tf-backend"    # Update the bucket name
-    key            = "eks-fluxcd-lab" # Update key name
-    region         = "us-west-2"            # Update with aws region
-    profile        = "bsisandbox"           # Update profile name
+    bucket         = "dallin-tf-backend" # Update the bucket name
+    key            = "eks-fluxcd-lab"    # Update key name
+    region         = "us-west-2"         # Update with aws region
+    profile        = "bsisandbox"        # Update profile name
     encrypt        = true
     dynamodb_table = "dallin-tf-backend" # Update dynamodb_table
   }
@@ -14,13 +14,6 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 5.0"
     }
-    # flux = {
-    #   source = "fluxcd/flux"
-    # }
-    # github = {
-    #   source  = "integrations/github"
-    #   version = ">=5.18.0"
-    # }
   }
 
   required_version = ">= 1.0.0"
@@ -51,36 +44,3 @@ provider "kubernetes" {
     args = ["eks", "get-token", "--cluster-name", module.eks.cluster_name]
   }
 }
-
-provider "helm" {
-  kubernetes {
-    host                   = module.eks.cluster_endpoint
-    cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
-
-    exec {
-      api_version = "client.authentication.k8s.io/v1beta1"
-      command     = "aws"
-      # This requires the awscli to be installed locally where Terraform is executed
-      args = ["eks", "get-token", "--cluster-name", module.eks.cluster_name]
-    }
-  }
-}
-
-# provider "github" {}
-
-# provider "flux" {
-#   kubernetes = {
-#     config_path = "~/.kube/config"
-#     # host                   = module.eks.cluster_endpoint
-#     # # client_certificate     = kind_cluster.this.client_certificate
-#     # # client_key             = kind_cluster.this.client_key
-#     # cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
-#   }
-#   git = {
-#     url  = "ssh://git@github.com/junglekid/aws-eks-fluxcd-lab.git"
-#     ssh = {
-#       username    = "git"
-#       private_key = tls_private_key.flux.private_key_pem
-#     }
-#   }
-# }

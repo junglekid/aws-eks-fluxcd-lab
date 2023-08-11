@@ -2,30 +2,31 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: external-dns
+  name: cluster-autoscaler
   namespace: flux-system
 spec:
   chart:
     spec:
-      chart: external-dns
+      chart: cluster-autoscaler
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
-        name: external-dns
+        name: cluster-autoscaler
         namespace: flux-system
   install:
     crds: CreateReplace
   upgrade:
     crds: CreateReplace
   values:
-    serviceAccount:
-      create: true
-      name: SA_EXTERNAL_DNS_NAME
-      annotations:
-        eks.amazonaws.com/role-arn: SA_EXTERNAL_DNS_IAM_ROLE_ARN
-    region: AWS_REGION
-    clusterName: EKS_CLUSTER_NAME
-    domainFilters: ["EXTERNAL_DNS_DOMAIN_FILTER"]
+    autoDiscovery:
+      clusterName: EKS_CLUSTER_NAME
+    rbac:
+      serviceAccount:
+        create: false
+        name: sa-cluster-autoscaler
+    awsRegion: AWS_REGION
+    cloudProvider: aws
+    replicaCount: 2
   interval: 2m0s
-  releaseName: external-dns
+  releaseName: cluster-autoscaler
   targetNamespace: kube-system

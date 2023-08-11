@@ -1,0 +1,34 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: cluster-autoscaler
+  namespace: flux-system
+spec:
+  chart:
+    spec:
+      chart: cluster-autoscaler
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: cluster-autoscaler
+        namespace: flux-system
+  install:
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
+  values:
+    autoDiscovery:
+      clusterName: EKS_CLUSTER_NAME
+    awsRegion: AWS_REGION
+    cloudProvider: aws
+    rbac:
+      serviceAccount:
+        create: true
+        name: SA_CLUSTER_AUTOSCALER_NAME
+        annotations:
+          eks.amazonaws.com/role-arn: SA_CLUSTER_AUTOSCALER_IAM_ROLE_ARN
+    replicaCount: 2
+  interval: 2m0s
+  releaseName: cluster-autoscaler
+  targetNamespace: kube-system

@@ -29,60 +29,27 @@ module "eks" {
 }
 
 # Create AWS EKS Node Group
-resource "aws_eks_node_group" "eks" {
-  cluster_name    = module.eks.cluster_name
-  node_group_name = "node_workers"
-  node_role_arn   = aws_iam_role.eks_node.arn
-  subnet_ids      = module.vpc.private_subnets
-  instance_types  = ["m5.large"]
+module "eks_managed_node_group" {
+  source  = "terraform-aws-modules/eks/aws//modules/eks-managed-node-group"
+  version = "~> 19.15"
+
+  name         = "node_workers"
+  cluster_name = module.eks.cluster_name
+
+  subnet_ids = module.vpc.private_subnets
+
+  cluster_primary_security_group_id = module.eks.cluster_primary_security_group_id
+  vpc_security_group_ids            = [module.eks.node_security_group_id]
+
+  min_size     = 3
+  max_size     = 10
+  desired_size = 3
+
+  instance_types  = ["m5a.large", "m5.large"]
   capacity_type   = "SPOT"
-
-  scaling_config {
-    desired_size = 3
-    max_size     = 10
-    min_size     = 1
-  }
-
-  update_config {
-    max_unavailable = 1
-  }
-
-  depends_on = [module.eks]
+  create_iam_role = true
 }
 
-# Create AWS IAM Role for EKS Nodes
-resource "aws_iam_role" "eks_node" {
-  name = "${local.eks_iam_role_prefix}-node-group-role"
-
-  assume_role_policy = jsonencode({
-    Statement = [{
-      Action = "sts:AssumeRole"
-      Effect = "Allow"
-      Principal = {
-        Service = "ec2.amazonaws.com"
-      }
-    }]
-    Version = "2012-10-17"
-  })
-}
-
-# Attach AWS IAM Policy to IAM Role for EKS Nodes
-resource "aws_iam_role_policy_attachment" "eks_node-AmazonEKSWorkerNodePolicy" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
-  role       = aws_iam_role.eks_node.name
-}
-
-# Attach AWS IAM Policy to IAM Role for EKS Nodes
-resource "aws_iam_role_policy_attachment" "eks_node-AmazonEKS_CNI_Policy" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
-  role       = aws_iam_role.eks_node.name
-}
-
-# Attach AWS IAM Policy to IAM Role for EKS Nodes
-resource "aws_iam_role_policy_attachment" "eks_node-AmazonEC2ContainerRegistryReadOnly" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
-  role       = aws_iam_role.eks_node.name
-}
 
 # Install EKS Addon CoreDNS
 resource "aws_eks_addon" "coredns" {
@@ -90,7 +57,8 @@ resource "aws_eks_addon" "coredns" {
   addon_name                  = "coredns"
   resolve_conflicts_on_update = "OVERWRITE"
 
-  depends_on = [aws_eks_node_group.eks]
+  # depends_on = [aws_eks_node_group.eks]
+  depends_on = [module.eks_managed_node_group]
 }
 
 # Create IAM Role for AWS VPC CNI Service Account
