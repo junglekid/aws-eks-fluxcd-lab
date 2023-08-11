@@ -24,10 +24,8 @@ spec:
     cloudProvider: aws
     rbac:
       serviceAccount:
-        create: true
+        create: false
         name: SA_CLUSTER_AUTOSCALER_NAME
-        annotations:
-          eks.amazonaws.com/role-arn: SA_CLUSTER_AUTOSCALER_IAM_ROLE_ARN
     replicaCount: 2
   interval: 2m0s
   releaseName: cluster-autoscaler

@@ -1,0 +1,28 @@
+react-app:
+  name: react-app
+  container:
+    image:
+      repository:
+      tag: latest
+    imagePullPolicy: Always
+    resources:
+      requests:
+        cpu: 250m
+        memory: 1Gi
+    containerPort: 5000
+  replicas: 4
+
+service:
+  name: react-app
+  port: 80
+  type: ClusterIP
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 5000
+
+ingress:
+  name: ingress-react-app
+  dnsHostname:
+  annotations: {}

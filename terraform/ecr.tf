@@ -1,11 +1,9 @@
-# Create AWS ECR 
+# Create AWS ECR
 module "ecr" {
-  for_each = toset(local.ecr_repo_names)
-
   source  = "terraform-aws-modules/ecr/aws"
   version = "~> 1.6.0"
 
-  repository_name = each.value
+  repository_name = local.ecr_repo_name
 
   create_lifecycle_policy         = true
   repository_image_tag_mutability = "MUTABLE"

@@ -17,21 +17,20 @@ locals {
   azs      = slice(data.aws_availability_zones.available.names, 0, 3)
 
   # ECR Configuration
-  ecr_repo_names = ["eks-fluxcd-lab-red-color", "eks-fluxcd-lab-blue-color"]
+  ecr_repo_name = "eks-fluxcd-lab-react-app"
 
   # EKS Configuration
-  eks_cluster_name                          = "eks-fluxcd-lab"
-  eks_cluster_version                       = "1.27"
-  eks_iam_role_prefix                       = "eks-fluxcd-lab"
-  eks_alb_service_account_name              = "aws-load-balancer-controller"
-  eks_external_dns_service_account_name     = "external-dns"
-  eks_cluster_autoscaler_service_account_name = "cluster-autoscaler"
-  # eks_fluxcd_namespace                      = "fluxcd"
+  eks_cluster_name                            = "eks-fluxcd-lab"
+  eks_cluster_version                         = "1.27"
+  eks_iam_role_prefix                         = "sa-eks-fluxcd-lab"
+  eks_alb_service_account_name                = "sa-aws-load-balancer-controller"
+  eks_external_dns_service_account_name       = "sa-external-dns"
+  eks_cluster_autoscaler_service_account_name = "sa-cluster-autoscaler"
 
   # ACM and Route53 Configuration
-  public_domain              = "bsisandbox.com"                  # Update with your root domain
-  eks_fluxcd_lab_domain_name = "eks-fluxcd-lab.bsisandbox.com"   # Update with your custom domain name
-  weave_gitops_domain_name   = "eks-weave-gitops.bsisandbox.com" # Update with your custom domain name
-  podinfo_domain_name        = "eks-podinfo-lab.bsisandbox.com"  # Update with your custom domain name
-  route53_zone_id            = data.aws_route53_zone.public_domain.zone_id
+  public_domain            = "dallin.brewsentry.com"                # Update with your root domain
+  react_app_domain_name    = "react-app.dallin.brewsentry.com" # Update with your custom domain name
+  weave_gitops_domain_name = "weave-gitops.dallin.brewsentry.com"   # Update with your custom domain name
+  podinfo_domain_name      = "podinfo.dallin.brewsentry.com"        # Update with your custom domain name
+  route53_zone_id          = data.aws_route53_zone.public_domain.zone_id
 }

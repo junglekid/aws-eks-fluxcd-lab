@@ -49,6 +49,7 @@ plan.out
 
 # Ignore backup folder
 **/backup/*
-color/*
-images/*
-charts/*
+
+# Ignore Node JS Folders
+*/build/*
+*/node_modules/*

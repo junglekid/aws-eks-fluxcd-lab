@@ -17,15 +17,14 @@ output "eks_cluster_endpoint" {
   value = module.eks.cluster_endpoint
 }
 
-# # Output ECR Repo
-# output "ecr_repo_url" {
-#   value = module.ecr.repository_url
-# }
+# Output ECR Repo
+output "ecr_repo_url" {
+  value = module.ecr.repository_url
+}
 
 # Output EKS Service Account for AWS Load Balancer Controller
 output "eks_sa_alb_name" {
-  # value = kubernetes_service_account.alb_service_account.metadata[0].name
-  value = local.eks_alb_service_account_name
+  value = kubernetes_service_account.alb_service_account.metadata[0].name
 }
 
 output "eks_sa_alb_iam_role_arn" {
@@ -34,8 +33,7 @@ output "eks_sa_alb_iam_role_arn" {
 
 # Output EKS Service Account for External DNS
 output "eks_sa_external_dns_name" {
-  # value = kubernetes_service_account.external_dns_service_account.metadata[0].name
-  value = local.eks_external_dns_service_account_name
+  value = kubernetes_service_account.external_dns_service_account.metadata[0].name
 }
 
 output "eks_sa_external_dns_iam_role_arn" {
@@ -44,8 +42,7 @@ output "eks_sa_external_dns_iam_role_arn" {
 
 # Output EKS Service Account for External DNS
 output "eks_sa_cluster_autoscaler_name" {
-  # value = kubernetes_service_account.cluster_autoscaler_service_account.metadata[0].name
-  value = local.eks_cluster_autoscaler_service_account_name
+  value = kubernetes_service_account.cluster_autoscaler_service_account.metadata[0].name
 }
 
 output "eks_sa_cluster_autoscaler_iam_role_arn" {
@@ -75,26 +72,10 @@ output "podinfo_acm_certificate_arn" {
   value = aws_acm_certificate_validation.podinfo.certificate_arn
 }
 
-output "eks_fluxcd_lab_domain_name" {
-  value = local.eks_fluxcd_lab_domain_name
+output "react_app_domain_name" {
+  value = local.react_app_domain_name
 }
 
-output "eks_fluxcd_lab_acm_certificate_arn" {
-  value = aws_acm_certificate_validation.eks_fluxcd_lab.certificate_arn
+output "react_app_acm_certificate_arn" {
+  value = aws_acm_certificate_validation.react_app.certificate_arn
 }
-
-# output "eks_karpenter_irsa_arn" {
-#   value = module.karpenter.irsa_arn
-# }
-
-# output "eks_karpenter_instance_profile_name" {
-#   value = module.karpenter.instance_profile_name
-# }
-
-# output "eks_karpenter_queue_name" {
-#   value = module.karpenter.queue_name
-# }
-
-# output "eks_cluster_autoscaler_irsa_arn" {
-#   value = module.cluster_autoscaler_irsa_role.irsa_arn
-# }

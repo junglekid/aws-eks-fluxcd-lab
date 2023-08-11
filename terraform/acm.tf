@@ -70,8 +70,8 @@ resource "aws_acm_certificate_validation" "podinfo" {
 
 ### EKS FluxCD
 # Create SSL Certificate using AWS ACM for EKS FluxCD
-resource "aws_acm_certificate" "eks_fluxcd_lab" {
-  domain_name       = local.eks_fluxcd_lab_domain_name
+resource "aws_acm_certificate" "react_app" {
+  domain_name       = local.react_app_domain_name
   validation_method = "DNS"
 
   lifecycle {
@@ -80,9 +80,9 @@ resource "aws_acm_certificate" "eks_fluxcd_lab" {
 }
 
 # Validate SSL Certificate using DNS for EKS FluxCD
-resource "aws_route53_record" "eks_fluxcd_lab_validation" {
+resource "aws_route53_record" "react_app_validation" {
   for_each = {
-    for dvo in aws_acm_certificate.eks_fluxcd_lab.domain_validation_options : dvo.domain_name => {
+    for dvo in aws_acm_certificate.react_app.domain_validation_options : dvo.domain_name => {
       name   = dvo.resource_record_name
       record = dvo.resource_record_value
       type   = dvo.resource_record_type
@@ -98,7 +98,7 @@ resource "aws_route53_record" "eks_fluxcd_lab_validation" {
 }
 
 # Retrieve SSL Certificate ARN from AWS ACM for EKS FluxCD
-resource "aws_acm_certificate_validation" "eks_fluxcd_lab" {
-  certificate_arn         = aws_acm_certificate.eks_fluxcd_lab.arn
-  validation_record_fqdns = [for record in aws_route53_record.eks_fluxcd_lab_validation : record.fqdn]
+resource "aws_acm_certificate_validation" "react_app" {
+  certificate_arn         = aws_acm_certificate.react_app.arn
+  validation_record_fqdns = [for record in aws_route53_record.react_app_validation : record.fqdn]
 }
