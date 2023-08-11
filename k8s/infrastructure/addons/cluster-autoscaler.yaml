@@ -25,7 +25,7 @@ spec:
     rbac:
       serviceAccount:
         create: true
-        name: SA_CLUSTER_AUTOSCALER_NAME
+        name: cluster-autoscaler
         annotations:
           eks.amazonaws.com/role-arn: arn:aws:iam::704855531002:role/eks-fluxcd-lab-cluster-autoscaler
     replicaCount: 2
