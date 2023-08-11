@@ -26,7 +26,7 @@ spec:
     region: us-west-2
     clusterName: eks-fluxcd-lab
     domainFilters: ["bsisandbox.com"]
-    policy: sync
+    policy: upsert-only
   interval: 2m0s
   releaseName: external-dns
   targetNamespace: kube-system
