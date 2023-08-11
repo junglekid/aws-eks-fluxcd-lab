@@ -17,7 +17,6 @@ spec:
         kind: HelmRepository
         name: weave-gitops
       interval: 12h
-  # https://github.com/weaveworks/weave-gitops/blob/main/charts/gitops-server/values.yaml
   values:
     resources:
       requests:
@@ -30,12 +29,6 @@ spec:
     adminUser:
       create: true
       username: admin
-      # Change password by generating a new hash with:
-      # https://docs.gitops.weave.works/docs/configuration/securing-access-to-the-dashboard/#login-via-a-cluster-user-account
-      # bcrypt hash for password "flux"
-      # passwordHash: "$2a$10$P/tHQ1DNFXdvX0zRGA8LPeSOyb0JXq9rP3fZ4W8HGTpLV7qHDlWhe"
-      # passwordHash: $2a$10$KrkUBddpFLM5Q4GlYNvOhu1NvxLqfY3tMIer6rQp3nSAA4OAVT18i
-      # passwordHash: WEAVE_GITOPS_PASSWORD_HASH
       passwordHash: $2a$10$z6BEJcTqCTgxlYr3YLOwo.TO4PhKPHagHWNVDItGwfyuJa/2EfM3K
     ingress:
       enabled: true
