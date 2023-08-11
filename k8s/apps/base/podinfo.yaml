@@ -27,14 +27,14 @@ spec:
       annotations:
         alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig":
           { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
-        alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:us-west-2:704855531002:certificate/b603a493-ca4c-465b-ba5a-fa213938a3eb"
+        alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:us-west-2:704855531002:certificate/99c1b06d-5f7c-4df1-8f18-b08977c055b0"
         alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
         alb.ingress.kubernetes.io/scheme: internet-facing
         alb.ingress.kubernetes.io/ssl-redirect: "443"
         alb.ingress.kubernetes.io/target-type: ip
-        external-dns.alpha.kubernetes.io/hostname: eks-podinfo-lab.dallin.brewsentry.com
+        external-dns.alpha.kubernetes.io/hostname: podinfo.dallin.brewsentry.com
       hosts:
-      - host: eks-podinfo-lab.dallin.brewsentry.com
+      - host: podinfo.dallin.brewsentry.com
         paths:
         - path: /
           pathType: Prefix
