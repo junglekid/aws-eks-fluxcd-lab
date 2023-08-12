@@ -10,7 +10,7 @@ spec:
       chart: react-app
       version: ">=0.1.0"
       sourceRef:
-        kind: HelmRepository
+        kind: GitRepository
         name: react-app
         namespace: flux-system
   values:

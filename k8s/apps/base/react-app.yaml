@@ -10,13 +10,13 @@ spec:
       chart: react-app
       version: ">=0.1.0"
       sourceRef:
-        kind: HelmRepository
+        kind: GitRepository
         name: react-app
         namespace: flux-system
   values:
     container:
       image:
-        repository: 
+        repository:
         tag: latest
     ingress:
       annotations:
@@ -27,7 +27,7 @@ spec:
         alb.ingress.kubernetes.io/scheme: internet-facing
         alb.ingress.kubernetes.io/ssl-redirect: "443"
         alb.ingress.kubernetes.io/target-type: ip
-        external-dns.alpha.kubernetes.io/hostname: 
+        external-dns.alpha.kubernetes.io/hostname:
       dnsHostname:
   interval: 10m0s
   releaseName: react-app
