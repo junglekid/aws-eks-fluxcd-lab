@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.react-app.name | quote }}
+  name: {{ .Values.deployment.name | quote }}
   labels:
     app: react-app
   {{- include "react-app.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.react-app.replicas }}
+  replicas: {{ .Values.deployment.replicas }}
   selector:
     matchLabels:
       app: react-app
@@ -18,16 +18,10 @@ spec:
       {{- include "react-app.selectorLabels" . | nindent 8 }}
     spec:
       containers:
-      - env:
-        envFrom:
-        - configMapRef:
-            name: {{ .Values.configMap.name | quote }}
-        - secretRef:
-            name: {{ .Values.secret.name | quote }}
-        image: {{ .Values.react-app.container.image.repository }}:{{ .Values.react-app.container.image.tag }}
-        imagePullPolicy: {{ .Values.react-app.container.imagePullPolicy }}
+        image: {{ .Values.deployment.container.image.repository }}:{{ .Values.deployment.container.image.tag }}
+        imagePullPolicy: {{ .Values.deployment.container.imagePullPolicy }}
         name: react-app
         ports:
-        - containerPort: {{ .Values.react-app.container.containerPort }}
+        - containerPort: {{ .Values.deployment.container.containerPort }}
           protocol: TCP
-        resources: {{- toYaml .Values.react-app.container.resources | nindent 10 }}
+        resources: {{- toYaml .Values.deployment.container.resources | nindent 10 }}

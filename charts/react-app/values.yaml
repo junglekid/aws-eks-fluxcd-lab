@@ -1,4 +1,4 @@
-react-app:
+deployment:
   name: react-app
   container:
     image:
