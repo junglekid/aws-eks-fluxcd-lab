@@ -46,8 +46,7 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 Selector labels
 */}}
 {{- define "react-app.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "react-app.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
+app.kubernetes.io/name: {{ include "react-app.fullname" . }}
 {{- end }}
 
 {{/*

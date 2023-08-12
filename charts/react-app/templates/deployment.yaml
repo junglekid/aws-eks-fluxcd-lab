@@ -9,12 +9,10 @@ spec:
   replicas: {{ .Values.deployment.replicas }}
   selector:
     matchLabels:
-      app: react-app
     {{- include "react-app.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        app: react-app
       {{- include "react-app.selectorLabels" . | nindent 8 }}
     spec:
       containers:
@@ -24,4 +22,5 @@ spec:
         ports:
         - containerPort: {{ .Values.deployment.container.containerPort }}
           protocol: TCP
-        resources: {{- toYaml .Values.deployment.container.resources | nindent 10 }}
+        resources:
+        {{- toYaml .Values.deployment.container.resources | nindent 12 }}
