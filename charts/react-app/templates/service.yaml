@@ -7,7 +7,6 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   selector:
-    app: react-app
     {{- include "react-app.selectorLabels" . | nindent 4 }}
   ports:
 	{{- .Values.service.ports | toYaml | nindent 2 -}}

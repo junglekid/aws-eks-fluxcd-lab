@@ -3,7 +3,6 @@ kind: Deployment
 metadata:
   name: {{ .Values.deployment.name | quote }}
   labels:
-    app: react-app
     {{- include "react-app.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.deployment.replicas }}
@@ -13,12 +12,10 @@ spec:
       maxUnavailable: 1
   selector:
     matchLabels:
-      app: react-app
       {{- include "react-app.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        app: react-app
         {{- include "react-app.selectorLabels" . | nindent 8 }}
     spec:
       containers:
