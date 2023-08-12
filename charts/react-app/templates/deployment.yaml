@@ -18,7 +18,7 @@ spec:
       {{- include "react-app.selectorLabels" . | nindent 8 }}
     spec:
       containers:
-        image: {{ .Values.deployment.container.image.repository }}:{{ .Values.deployment.container.image.tag }}
+      - image: {{ .Values.deployment.container.image.repository }}:{{ .Values.deployment.container.image.tag }}
         imagePullPolicy: {{ .Values.deployment.container.imagePullPolicy }}
         name: react-app
         ports:

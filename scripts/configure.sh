@@ -23,7 +23,10 @@ AWS_WEAVE_GITOPS_DOMAIN_NAME=$(terraform output -raw weave_gitops_domain_name)
 AWS_ACM_WEAVE_GITOPS_ARN=$(terraform output -raw weave_gitops_acm_certificate_arn)
 AWS_PODINFO_DOMAIN_NAME=$(terraform output -raw podinfo_domain_name)
 AWS_ACM_PODINFO_ARN=$(terraform output -raw podinfo_acm_certificate_arn)
+AWS_REACT_APP_DOMAIN_NAME=$(terraform output -raw react_app_domain_name)
+AWS_ACM_REACT_APP_ARN=$(terraform output -raw react_app_acm_certificate_arn)
 REACT_APP_GITHUB_URL="https://github.com/junglekid/aws-eks-fluxcd-lab"
+ECR_REPO=$(terraform output -raw ecr_repo_url)
 
 echo $WEAVE_GITOPS_PASSWORD | tr -d '\n'
 
@@ -47,6 +50,11 @@ cp -f ./k8s/templates/apps/base/react-app.yaml ./k8s/apps/base/react-app.yaml
 replace_in_file 's|AWS_REACT_APP_DOMAIN_NAME|'"$AWS_REACT_APP_DOMAIN_NAME"'|g' ./k8s/apps/base/react-app.yaml
 replace_in_file 's|AWS_ACM_REACT_APP_ARN|'"$AWS_ACM_REACT_APP_ARN"'|g' ./k8s/apps/base/react-app.yaml
 replace_in_file 's|ECR_REPO|'"$ECR_REPO"'|g' ./k8s/apps/base/react-app.yaml
+
+sed -i '' -e 's|AWS_REACT_APP_DOMAIN_NAME|'"$AWS_REACT_APP_DOMAIN_NAME"'|g' ./k8s/apps/base/react-app.yaml
+sed -i '' -e 's|AWS_ACM_REACT_APP_ARN|'"$AWS_ACM_REACT_APP_ARN"'|g' ./k8s/apps/base/react-app.yaml
+sed -i '' -e 's|ECR_REPO|'"$ECR_REPO"'|g' ./k8s/apps/base/react-app.yaml
+
 
 cp -f ./k8s/templates/apps/sources/react-app.yaml ./k8s/apps/sources/react-app.yaml
 replace_in_file 's|REACT_APP_GITHUB_URL|'"$REACT_APP_GITHUB_URL"'|g' ./k8s/apps/sources/react-app.yaml

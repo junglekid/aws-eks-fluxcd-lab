@@ -14,10 +14,11 @@ spec:
         name: react-app
         namespace: flux-system
   values:
-    container:
-      image:
-        repository: ECR_REPO
-        tag: latest
+    deployment:
+      container:
+        image:
+          repository: ECR_REPO
+          tag: latest
     ingress:
       annotations:
         alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig":
@@ -28,7 +29,7 @@ spec:
         alb.ingress.kubernetes.io/ssl-redirect: "443"
         alb.ingress.kubernetes.io/target-type: ip
         external-dns.alpha.kubernetes.io/hostname: AWS_REACT_APP_DOMAIN_NAME
-      dnsHostname:
+      dnsHostname: AWS_REACT_APP_DOMAIN_NAME
   interval: 10m0s
   releaseName: react-app
   targetNamespace: react-app

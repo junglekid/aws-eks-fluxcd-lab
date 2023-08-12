@@ -23,6 +23,6 @@ service:
     targetPort: 5000
 
 ingress:
-  name: ingress-react-app
+  name: react-app
   dnsHostname:
   annotations: {}
