@@ -6,7 +6,7 @@ metadata:
     {{- include "react-app.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
-  ports:
-	  {{- .Values.service.ports | toYaml | nindent 2 -}}
   selector:
     {{- include "react-app.selectorLabels" . | nindent 4 }}
+  ports:
+	{{- .Values.service.ports | toYaml | nindent 2 -}}
