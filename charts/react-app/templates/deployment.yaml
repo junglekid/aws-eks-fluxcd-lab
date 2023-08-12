@@ -9,10 +9,12 @@ spec:
   replicas: {{ .Values.deployment.replicas }}
   selector:
     matchLabels:
+      app: react-app
     {{- include "react-app.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
+        app: react-app
       {{- include "react-app.selectorLabels" . | nindent 8 }}
     spec:
       containers:
