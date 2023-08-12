@@ -15,7 +15,6 @@ deployment:
 service:
   name: react-app
   type: ClusterIP
-  port: 5000
   ports:
   - name: http
     port: 5000
@@ -24,5 +23,6 @@ service:
 
 ingress:
   name: react-app
+  port: 5000
   dnsHostname:
   annotations: {}
