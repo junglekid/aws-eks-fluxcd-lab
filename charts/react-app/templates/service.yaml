@@ -3,11 +3,10 @@ kind: Service
 metadata:
   name: {{ .Values.service.name | quote }}
   labels:
-  {{- include "react-app.labels" . | nindent 4 }}
+    {{- include "react-app.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
-  selector:
-    app: react-app
-  {{- include "react-app.selectorLabels" . | nindent 4 }}
   ports:
-	{{- .Values.service.ports | toYaml | nindent 2 -}}
+	  {{- .Values.service.ports | toYaml | nindent 2 -}}
+  selector:
+    {{- include "react-app.selectorLabels" . | nindent 4 }}
