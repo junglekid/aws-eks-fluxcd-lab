@@ -51,11 +51,6 @@ replace_in_file 's|AWS_REACT_APP_DOMAIN_NAME|'"$AWS_REACT_APP_DOMAIN_NAME"'|g' .
 replace_in_file 's|AWS_ACM_REACT_APP_ARN|'"$AWS_ACM_REACT_APP_ARN"'|g' ./k8s/apps/base/react-app.yaml
 replace_in_file 's|ECR_REPO|'"$ECR_REPO"'|g' ./k8s/apps/base/react-app.yaml
 
-sed -i '' -e 's|AWS_REACT_APP_DOMAIN_NAME|'"$AWS_REACT_APP_DOMAIN_NAME"'|g' ./k8s/apps/base/react-app.yaml
-sed -i '' -e 's|AWS_ACM_REACT_APP_ARN|'"$AWS_ACM_REACT_APP_ARN"'|g' ./k8s/apps/base/react-app.yaml
-sed -i '' -e 's|ECR_REPO|'"$ECR_REPO"'|g' ./k8s/apps/base/react-app.yaml
-
-
 cp -f ./k8s/templates/apps/sources/react-app.yaml ./k8s/apps/sources/react-app.yaml
 replace_in_file 's|REACT_APP_GITHUB_URL|'"$REACT_APP_GITHUB_URL"'|g' ./k8s/apps/sources/react-app.yaml
 

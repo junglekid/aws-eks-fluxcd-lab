@@ -21,6 +21,19 @@ module "ecr" {
           type = "expire"
         }
       },
+      {
+        "rulePriority": 2,
+        "description": "Keep last 5 tagged images",
+        "selection": {
+          "tagStatus": "tagged",
+          "tagPrefixList": ["v"],
+          "countType": "imageCountMoreThan",
+          "countNumber": 4
+        },
+        "action": {
+          "type": "expire"
+        }
+      }
     ]
   })
 
