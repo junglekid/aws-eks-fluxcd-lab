@@ -94,9 +94,9 @@ resource "kubernetes_service_account" "cluster_autoscaler_service_account" {
     name      = local.eks_cluster_autoscaler_service_account_name
     namespace = "kube-system"
     labels = {
-      "app.kubernetes.io/name"      = local.eks_cluster_autoscaler_service_account_name
-      "k8s-addon" = "cluster-autoscaler.addons.k8s.io"
-      "k8s-app" = "cluster-autoscaler"
+      "app.kubernetes.io/name" = local.eks_cluster_autoscaler_service_account_name
+      "k8s-addon"              = "cluster-autoscaler.addons.k8s.io"
+      "k8s-app"                = "cluster-autoscaler"
     }
     annotations = {
       "eks.amazonaws.com/role-arn" = module.cluster_autoscaler_irsa_role.iam_role_arn

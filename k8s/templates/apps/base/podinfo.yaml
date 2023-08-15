@@ -38,6 +38,6 @@ spec:
         paths:
         - path: /
           pathType: Prefix
-  interval: 10m0s
+  interval: 2m0s
   releaseName: podinfo
   targetNamespace: podinfo

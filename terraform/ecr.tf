@@ -22,16 +22,16 @@ module "ecr" {
         }
       },
       {
-        "rulePriority": 2,
-        "description": "Keep last 5 tagged images",
-        "selection": {
-          "tagStatus": "tagged",
-          "tagPrefixList": ["v"],
-          "countType": "imageCountMoreThan",
-          "countNumber": 4
+        "rulePriority" : 2,
+        "description" : "Keep last 5 tagged images",
+        "selection" : {
+          "tagStatus" : "tagged",
+          "tagPrefixList" : ["v"],
+          "countType" : "imageCountMoreThan",
+          "countNumber" : 4
         },
-        "action": {
-          "type": "expire"
+        "action" : {
+          "type" : "expire"
         }
       }
     ]

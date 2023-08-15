@@ -28,9 +28,9 @@ locals {
   eks_cluster_autoscaler_service_account_name = "sa-cluster-autoscaler"
 
   # ACM and Route53 Configuration
-  public_domain            = "dallin.brewsentry.com"                # Update with your root domain
-  react_app_domain_name    = "react-app.dallin.brewsentry.com" # Update with your custom domain name
-  weave_gitops_domain_name = "weave-gitops.dallin.brewsentry.com"   # Update with your custom domain name
-  podinfo_domain_name      = "podinfo.dallin.brewsentry.com"        # Update with your custom domain name
+  public_domain            = "dallin.brewsentry.com"              # Update with your root domain
+  react_app_domain_name    = "react-app.dallin.brewsentry.com"    # Update with your custom domain name
+  weave_gitops_domain_name = "weave-gitops.dallin.brewsentry.com" # Update with your custom domain name
+  podinfo_domain_name      = "podinfo.dallin.brewsentry.com"      # Update with your custom domain name
   route53_zone_id          = data.aws_route53_zone.public_domain.zone_id
 }

@@ -9,6 +9,8 @@ function replace_in_file() {
     fi
 }
 
+echo "Gathering AWS Resources and Names necessary to run the Kubernetes Applications and Services deployed by Flux"
+
 cd ../terraform
 AWS_REGION=$(terraform output -raw aws_region)
 EKS_CLUSTER_NAME=$(terraform output -raw eks_cluster_name)
@@ -28,16 +30,11 @@ AWS_ACM_REACT_APP_ARN=$(terraform output -raw react_app_acm_certificate_arn)
 REACT_APP_GITHUB_URL="https://github.com/junglekid/aws-eks-fluxcd-lab"
 ECR_REPO=$(terraform output -raw ecr_repo_url)
 
-echo $WEAVE_GITOPS_PASSWORD | tr -d '\n'
-
-gitops get bcrypt-hash <<< $WEAVE_GITOPS_PASSWORD
-
-echo "Configuring access to Amazon EKS Cluster..."
-aws eks --region $AWS_REGION update-kubeconfig --name $EKS_CLUSTER_NAME
+echo ""
+echo "Configuring Apps managed by FluxCD..."
 echo ""
 
 cd ..
-echo "Configuring Apps managed by FluxCD..."
 cp -f ./k8s/templates/apps/base/podinfo.yaml ./k8s/apps/base/podinfo.yaml
 replace_in_file 's|AWS_PODINFO_DOMAIN_NAME|'"$AWS_PODINFO_DOMAIN_NAME"'|g' ./k8s/apps/base/podinfo.yaml
 replace_in_file 's|AWS_ACM_PODINFO_ARN|'"$AWS_ACM_PODINFO_ARN"'|g' ./k8s/apps/base/podinfo.yaml
@@ -73,6 +70,10 @@ replace_in_file 's|SA_CLUSTER_AUTOSCALER_IAM_ROLE_ARN|'"$SA_CLUSTER_AUTOSCALER_I
 replace_in_file 's|AWS_REGION|'"$AWS_REGION"'|g' ./k8s/infrastructure/addons/cluster-autoscaler.yaml
 replace_in_file 's|EKS_CLUSTER_NAME|'"$EKS_CLUSTER_NAME"'|g' ./k8s/infrastructure/addons/cluster-autoscaler.yaml
 
+echo ""
+echo "Pushing changes to Git repository..."
+echo ""
+
 git add ./k8s/apps/base/podinfo.yaml
 git add ./k8s/apps/base/weave-gitops.yaml
 git add ./k8s/apps/base/react-app.yaml
@@ -82,3 +83,6 @@ git add ./k8s/infrastructure/addons/external-dns.yaml
 git add ./k8s/infrastructure/addons/cluster-autoscaler.yaml
 git commit -m "Updating Apps"
 git push
+
+echo ""
+echo "Finished configuring Apps managed by FluxCD..."

@@ -7,7 +7,7 @@ deployment:
     imagePullPolicy: Always
     resources:
       requests:
-        cpu: 250m
+        cpu: 500m
         memory: 512Mi
     containerPort: 5000
   replicas: 4
