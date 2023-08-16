@@ -1,6 +1,6 @@
-# Amazon EKS and FluxCD Lab
+# Using Flux, a GitOps Tool, with Amazon Elastic Kubernetes Service (EKS)
 
-![Aamzon EKS and FluxCD](./images/amazon_ec_eks_ecr_lab.png)
+![Using Flux, a GitOps Tool, with Amazon Elastic Kubernetes Service (EKS)](./images/flux_and_aws_eks.png)
 
 ## Table of Contents
 
