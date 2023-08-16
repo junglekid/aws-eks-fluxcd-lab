@@ -44,7 +44,7 @@ Before we begin, let's define what GitOps is and what GitOps tool we will use in
 
 ## What is GitOps?
 
-GitOps is a software development and operations (DevOps) methodology that leverages the principles of version control and collaboration from Git to manage the deployment and operation of applications and infrastructure more efficiently. The core idea behind GitOps is to use Git repositories as the source of truth for both application code and infrastructure configuration. This approach aims to streamline and automate the process of deploying, managing, and monitoring software systems.
+GitOps is a software development and operations (DevOps) methodology that leverages the principles of version control and collaboration from Git to manage the deployment and operation of applications and infrastructure more efficiently. The core idea behind GitOps is to use Git repositories as the source of truth for both application code and infrastructure configuration. This approach aims to streamline and automate deploying, managing, and monitoring software systems.
 
 GitOps works on a few foundational principles:
 
@@ -350,9 +350,9 @@ Now that we have reviewed the "configure.sh" script follow these steps to config
 
 Flux provides several ways to structure and organize your repositories. Please click [here](https://fluxcd.io/flux/guides/repository-structure/) if you want more information on the various methods
 
-Let's see how we organized our folder structure. It looks like this.
+Let's see how we organized the folder structure. It looks like this.
 
-Each cluster we want to manage is defined in a dedicated directory. In our case, we are using the name "eks-fluxcd-lab". This directory is where we define the apps and infrastructure we want to be managed by Flux.
+Each cluster we want to manage is defined in a dedicated directory. In this example, we are using the name "eks-fluxcd-lab". This directory is where we define the apps and infrastructure we want to be managed by Flux.
 
 ![Flux Cluster Folder](./images/flux_cluster_folder.png)
 
@@ -362,7 +362,7 @@ Below is the folder structure we are using to define what apps and infrastructur
 
 ![Flux App Folders](./images/flux_app_folders.png)
 
-One benefit of separating apps from infrastructure is that we can define the order in apps, and infrastructure is reconciled and deployed. In our case, infrastructure is deployed first, and then the apps are deployed. This is accomplished by the apps.yaml and infrastructure.yaml files are located in the clusters/eks-flux-lab folder.
+One benefit of separating apps from infrastructure is that we can define the order in apps, and infrastructure is reconciled and deployed. In this example, infrastructure is deployed first, then the apps are deployed. This is accomplished by the apps.yaml and infrastructure.yaml files are located in the clusters/eks-flux-lab folder.
 
 In the apps.yaml, the "app-sources" depend on "infra-configs" to be reconciled first.
 
