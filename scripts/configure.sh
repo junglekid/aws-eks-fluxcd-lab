@@ -9,7 +9,9 @@ function replace_in_file() {
     fi
 }
 
-echo "Gathering AWS Resources and Names necessary to run the Kubernetes Applications and Services deployed by Flux"
+echo "Gathering AWS Resources and Names necessary to run the Kubernetes Applications and Services deployed by Flux from Terraform Output..."
+echo "Hang on..."
+echo "This can take between 30 to 90 seconds..."
 
 cd ../terraform
 AWS_REGION=$(terraform output -raw aws_region)
@@ -82,7 +84,7 @@ git add ./k8s/infrastructure/addons/aws-load-balancer-controller.yaml
 git add ./k8s/infrastructure/addons/external-dns.yaml
 git add ./k8s/infrastructure/addons/cluster-autoscaler.yaml
 git commit -m "Updating Apps"
-git push
+git push &> /dev/null
 
 echo ""
 echo "Finished configuring Apps managed by FluxCD..."
