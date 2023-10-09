@@ -38,8 +38,8 @@ spec:
             app.kubernetes.io/component: monitoring
     grafana:
       defaultDashboardsEnabled: false
-      adminPassword: admin
-      replicas: 3
+      adminPassword: flux
+      replicas: 1
       ingress:
         enabled: true
         ingressClassName: "alb"
