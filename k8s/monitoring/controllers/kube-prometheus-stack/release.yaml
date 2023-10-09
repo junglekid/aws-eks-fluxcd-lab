@@ -55,6 +55,7 @@ spec:
       #   paths:
       #   - path: /
       #     pathType: Prefix
+      path: /*
   postRenderers:
     - kustomize:
         patches:
