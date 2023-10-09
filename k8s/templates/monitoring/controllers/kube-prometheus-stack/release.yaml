@@ -44,18 +44,18 @@ spec:
       annotations:
         alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig":
           { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
-        alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:us-west-2:704855531002:certificate/4e0cbeac-1d70-4cdf-8cd7-2303d3f701fc"
+        alb.ingress.kubernetes.io/certificate-arn: "AWS_ACM_GRAFANA_ARN"
         alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
         alb.ingress.kubernetes.io/scheme: internet-facing
         alb.ingress.kubernetes.io/ssl-redirect: "443"
         alb.ingress.kubernetes.io/target-type: ip
-        external-dns.alpha.kubernetes.io/hostname: grafana.dallin.brewsentry.com
+        external-dns.alpha.kubernetes.io/hostname: AWS_GRAFANA_DOMAIN_NAME
       hosts:
-      - host: grafana.dallin.brewsentry.com
+      - host: AWS_GRAFANA_DOMAIN_NAME
         paths:
         - path: /
           pathType: Prefix
-  postRenderers:
+postRenderers:
     - kustomize:
         patches:
           - target:

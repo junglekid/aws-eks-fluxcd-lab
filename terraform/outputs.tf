@@ -79,3 +79,11 @@ output "react_app_domain_name" {
 output "react_app_acm_certificate_arn" {
   value = aws_acm_certificate_validation.react_app.certificate_arn
 }
+
+output "grafana_domain_name" {
+  value = local.grafana_domain_name
+}
+
+output "grafana_acm_certificate_arn" {
+  value = aws_acm_certificate_validation.grafana.certificate_arn
+}
