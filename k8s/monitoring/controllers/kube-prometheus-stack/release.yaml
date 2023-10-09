@@ -26,11 +26,12 @@ spec:
       enabled: false
     prometheus:
       prometheusSpec:
+        replicas: 3
         retention: 24h
-        # resources:
-        #   requests:
-        #     cpu: 200m
-        #     memory: 200Mi
+        resources:
+          requests:
+            cpu: 200m
+            memory: 200Mi
         podMonitorNamespaceSelector: { }
         podMonitorSelector:
           matchLabels:
