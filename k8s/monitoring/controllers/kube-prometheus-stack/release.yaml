@@ -39,6 +39,7 @@ spec:
     grafana:
       defaultDashboardsEnabled: false
       adminPassword: admin
+      replicas: 3
       ingress:
         enabled: true
         ingressClassName: "alb"
