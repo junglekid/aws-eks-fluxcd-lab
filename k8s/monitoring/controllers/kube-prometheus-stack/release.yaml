@@ -36,7 +36,7 @@ spec:
           matchLabels:
             app.kubernetes.io/component: monitoring
     grafana:
-      defaultDashboardsEnabled: true
+      defaultDashboardsEnabled: false
       adminPassword: flux
     ingress:
       enabled: true
@@ -50,11 +50,11 @@ spec:
         alb.ingress.kubernetes.io/ssl-redirect: "443"
         alb.ingress.kubernetes.io/target-type: ip
         external-dns.alpha.kubernetes.io/hostname: grafana.dallin.brewsentry.com
-      hosts:
-      - host: grafana.dallin.brewsentry.com
-        paths:
-        - path: /
-          pathType: Prefix
+      # hosts:
+      # - host: grafana.dallin.brewsentry.com
+      #   paths:
+      #   - path: /
+      #     pathType: Prefix
   postRenderers:
     - kustomize:
         patches:
