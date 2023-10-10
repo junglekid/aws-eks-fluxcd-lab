@@ -33,7 +33,7 @@ spec:
         - destination:
             host: react-app
             port:
-              number: 9898
+              number: 5000
       match:
         - uri:
             prefix: /
