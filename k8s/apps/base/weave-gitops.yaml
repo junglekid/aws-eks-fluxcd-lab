@@ -16,7 +16,6 @@ spec:
         kind: HelmRepository
         name: weave-gitops
         namespace: flux-system
-      # interval: 12h
   values:
     resources:
       requests:

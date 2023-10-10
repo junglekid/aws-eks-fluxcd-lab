@@ -1,0 +1,75 @@
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: podinfo-gateway
+  namespace: podinfo
+spec:
+  selector:
+    istio: ingress-istio-ingress
+  servers:
+    - port:
+        number: 443
+        name: https-443
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        credentialName: "podinfo-tls"
+      hosts:
+        - "*"
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: podinfo-vs
+  namespace: podinfo
+spec:
+  hosts:
+    - "podinfo.dallin.brewsentry.com"
+  gateways:
+    - podinfo-gateway
+  http:
+    - route:
+        - destination:
+            host: podinfo
+            port:
+              number: 9898
+      match:
+        - uri:
+            prefix: /
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig":
+      { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
+    alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:us-west-2:704855531002:certificate/aae37b55-e3ed-4c15-88f4-89b94a426a03"
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/ssl-redirect: "443"
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/healthcheck-path: /healthz/ready
+    alb.ingress.kubernetes.io/healthcheck-port: status-port
+    alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
+    alb.ingress.kubernetes.io/backend-protocol: HTTPS
+    external-dns.alpha.kubernetes.io/hostname: "podinfo.dallin.brewsentry.com"
+  name: podinfo-ingress
+  namespace: istio-ingress
+spec:
+  ingressClassName: alb
+  tls:
+  - hosts:
+    - podinfo.dallin.brewsentry.com
+    secretName: podinfo-tls
+  rules:
+  - host: podinfo.dallin.brewsentry.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: istio-ingress-istio-ingress
+            port:
+              number: 443
+        path: /*
+        pathType: ImplementationSpecific
