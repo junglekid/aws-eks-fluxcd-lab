@@ -5,6 +5,8 @@ resources:
   - external-dns.yaml
   - metrics-server.yaml
   - cluster-autoscaler.yaml
-  - istio-namespace.yaml
+  - istio-system-ns.yaml
+  - istio-ingress-ns.yaml
   - istio-base.yaml
   - istiod.yaml
+  - istio-gateway.yaml
