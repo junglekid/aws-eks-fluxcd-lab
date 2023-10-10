@@ -3,6 +3,8 @@ kind: HelmRelease
 metadata:
   name: istio-ingress
   namespace: flux-system
+  labels:
+    app.kubernetes.io/part-of: istio
 spec:
   interval: 5m
   dependsOn:

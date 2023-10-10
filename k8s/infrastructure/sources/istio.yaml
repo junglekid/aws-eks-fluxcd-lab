@@ -4,6 +4,8 @@ kind: HelmRepository
 metadata:
   name: istio
   namespace: flux-system
+  labels:
+    app.kubernetes.io/part-of: istio
 spec:
   interval: 5m
   url: https://istio-release.storage.googleapis.com/charts
