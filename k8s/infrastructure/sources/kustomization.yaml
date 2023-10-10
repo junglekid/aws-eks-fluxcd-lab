@@ -6,3 +6,4 @@ resources:
   - external-dns.yaml
   - metrics-server.yaml
   - cluster-autoscaler.yaml
+  - istio.yaml
