@@ -48,7 +48,7 @@ spec:
   http:
     - route:
         - destination:
-            host: react-app.react-app.svc.cluster.local
+            host: react-app
             port:
               number: 5000
       match:
