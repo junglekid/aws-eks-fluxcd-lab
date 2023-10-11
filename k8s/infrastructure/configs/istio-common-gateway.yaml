@@ -14,7 +14,7 @@ spec:
         protocol: HTTPS
       tls:
         mode: SIMPLE
-        credentialName: "podinfo-tls"
+        credentialName: "common-gateway-tls"
       hosts:
         - "*"
     - port:
