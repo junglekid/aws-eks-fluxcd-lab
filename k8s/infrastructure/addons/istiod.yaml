@@ -18,4 +18,7 @@ spec:
         kind: HelmRepository
         name: istio
       interval: 1m
+  values:
+    pilot:
+      autoscaleMin: 2
   targetNamespace: istio-system
