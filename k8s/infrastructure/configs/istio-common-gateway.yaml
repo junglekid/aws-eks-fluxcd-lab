@@ -6,7 +6,7 @@ metadata:
   namespace: istio-ingress
 spec:
   selector:
-    istio: istio-ingressgateway
+    istio: ingressgateway
   servers:
     - port:
         number: 443
