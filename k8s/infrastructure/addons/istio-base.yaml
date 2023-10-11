@@ -9,7 +9,7 @@ spec:
   interval: 5m
   releaseName: istio-base
   install:
-    crds: Create
+    crds: CreateReplace
   upgrade:
     crds: CreateReplace
   chart:
