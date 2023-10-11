@@ -1,43 +1,4 @@
 ---
-apiVersion: networking.istio.io/v1beta1
-kind: Gateway
-metadata:
-  name: react-app-gateway
-  namespace: react-app
-spec:
-  selector:
-    istio: ingress-istio-ingress
-  servers:
-    - port:
-        number: 443
-        name: https-443
-        protocol: HTTPS
-      tls:
-        mode: SIMPLE
-        credentialName: "react-app-tls"
-      hosts:
-        - "*"
----
-apiVersion: networking.istio.io/v1beta1
-kind: VirtualService
-metadata:
-  name: react-app-vs
-  namespace: react-app
-spec:
-  hosts:
-    - "react-app.dallin.brewsentry.com"
-  gateways:
-    - react-app-gateway
-  http:
-    - route:
-        - destination:
-            host: react-app
-            port:
-              number: 5000
-      match:
-        - uri:
-            prefix: /
----
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -73,3 +34,23 @@ spec:
               number: 443
         path: /*
         pathType: ImplementationSpecific
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: react-app-vs
+  namespace: react-app
+spec:
+  hosts:
+    - "react-app.dallin.brewsentry.com"
+  gateways:
+    - istio-ingress/common-gateway
+  http:
+    - route:
+        - destination:
+            host: react-app.react-app.svc.cluster.local
+            port:
+              number: 5000
+      match:
+        - uri:
+            prefix: /

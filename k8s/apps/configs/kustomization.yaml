@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
   - podinfo.yaml
   - react-app.yaml
-  # - weave-gitops.yaml
+  - weave-gitops.yaml
