@@ -4,7 +4,7 @@ module "eks" {
   version = "~> 19.15"
 
   cluster_name = local.eks_cluster_name
-  # cluster_version                 = local.eks_cluster_version
+  cluster_version                 = local.eks_cluster_version
   cluster_endpoint_private_access = true
   cluster_endpoint_public_access  = true
 

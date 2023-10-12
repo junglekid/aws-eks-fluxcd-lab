@@ -49,6 +49,14 @@ output "eks_sa_cluster_autoscaler_iam_role_arn" {
   value = module.cluster_autoscaler_irsa_role.iam_role_arn
 }
 
+output "eks_sa_ebs_csi_name" {
+  value = kubernetes_service_account.ebs_csi_service_account.metadata[0].name
+}
+
+output "eks_sa_ebs_csi_iam_role_arn" {
+  value = module.ebs_csi_irsa_role.iam_role_arn
+}
+
 # Output Domain Filter for External DNS
 output "domain_filter" {
   value = local.public_domain

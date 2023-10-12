@@ -108,3 +108,38 @@ resource "kubernetes_service_account" "cluster_autoscaler_service_account" {
     aws_eks_node_group.eks
   ]
 }
+
+# Create ISRA Role for Cluster Autoscaler
+module "ebs_csi_irsa_role" {
+  source = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+
+  role_name             = "${local.eks_iam_role_prefix}-ebs-csi-driver"
+  attach_ebs_csi_policy = true
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["kube-system:${local.eks_ebs_csi_service_account_name}"]
+    }
+  }
+}
+
+# Create K8S Service Account for AWS EBS CSI Driver
+resource "kubernetes_service_account" "ebs_csi_service_account" {
+  metadata {
+    name      = local.eks_ebs_csi_service_account_name
+    namespace = "kube-system"
+    labels = {
+      "app.kubernetes.io/name"      = local.eks_ebs_csi_service_account_name
+      "app.kubernetes.io/component" = "controller"
+    }
+    annotations = {
+      "eks.amazonaws.com/role-arn" = module.ebs_csi_irsa_role.iam_role_arn
+    }
+  }
+
+  depends_on = [
+    module.eks,
+    aws_eks_node_group.eks
+  ]
+}

@@ -21,9 +21,10 @@ locals {
 
   # EKS Configuration
   eks_cluster_name                            = "eks-fluxcd-lab"
-  eks_cluster_version                         = "1.27"
+  eks_cluster_version                         = "1.28"
   eks_iam_role_prefix                         = "sa-eks-fluxcd-lab"
   eks_alb_service_account_name                = "sa-aws-load-balancer-controller"
+  eks_ebs_csi_service_account_name            = "sa-aws-ebs-csi"
   eks_external_dns_service_account_name       = "sa-external-dns"
   eks_cluster_autoscaler_service_account_name = "sa-cluster-autoscaler"
 

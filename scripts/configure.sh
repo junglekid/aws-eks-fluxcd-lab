@@ -23,6 +23,8 @@ SA_EXTERNAL_DNS_NAME=$(terraform output -raw eks_sa_external_dns_name)
 SA_EXTERNAL_DNS_IAM_ROLE_ARN=$(terraform output -raw eks_sa_external_dns_iam_role_arn)
 SA_CLUSTER_AUTOSCALER_NAME=$(terraform output -raw eks_sa_cluster_autoscaler_name)
 SA_CLUSTER_AUTOSCALER_IAM_ROLE_ARN=$(terraform output -raw eks_sa_cluster_autoscaler_iam_role_arn)
+SA_AWS_EBS_CSI_NAME=$(terraform output -raw eks_sa_ebs_csi_name)
+SA_AWS_EBS_CSI_IAM_ROLE_ARN=$(terraform output -raw eks_sa_ebs_csi_iam_role_arn)
 AWS_WEAVE_GITOPS_DOMAIN_NAME=$(terraform output -raw weave_gitops_domain_name)
 AWS_ACM_WEAVE_GITOPS_ARN=$(terraform output -raw weave_gitops_acm_certificate_arn)
 AWS_PODINFO_DOMAIN_NAME=$(terraform output -raw podinfo_domain_name)
@@ -74,6 +76,12 @@ replace_in_file 's|SA_CLUSTER_AUTOSCALER_IAM_ROLE_ARN|'"$SA_CLUSTER_AUTOSCALER_I
 replace_in_file 's|AWS_REGION|'"$AWS_REGION"'|g' ./k8s/infrastructure/addons/cluster-autoscaler.yaml
 replace_in_file 's|EKS_CLUSTER_NAME|'"$EKS_CLUSTER_NAME"'|g' ./k8s/infrastructure/addons/cluster-autoscaler.yaml
 
+cp -f ./k8s/templates/infrastructure/addons/aws-ebs-csi-driver.yaml ./k8s/infrastructure/addons/aws-ebs-csi-driver.yaml
+replace_in_file 's|SA_AWS_EBS_CSI_NAME|'"$SA_AWS_EBS_CSI_NAME"'|g' ./k8s/infrastructure/addons/aws-ebs-csi-driver.yaml
+replace_in_file 's|SA_AWS_EBS_CSI_IAM_ROLE_ARN|'"$SA_AWS_EBS_CSI_IAM_ROLE_ARN"'|g' ./k8s/infrastructure/addons/aws-ebs-csi-driver.yaml
+replace_in_file 's|AWS_REGION|'"$AWS_REGION"'|g' ./k8s/infrastructure/addons/aws-ebs-csi-driver.yaml
+replace_in_file 's|EKS_CLUSTER_NAME|'"$EKS_CLUSTER_NAME"'|g' ./k8s/infrastructure/addons/aws-ebs-csi-driver.yaml
+
 echo ""
 echo "Pushing changes to Git repository..."
 echo ""
@@ -85,6 +93,7 @@ git add ./k8s/apps/sources/react-app.yaml
 git add ./k8s/infrastructure/addons/aws-load-balancer-controller.yaml
 git add ./k8s/infrastructure/addons/external-dns.yaml
 git add ./k8s/infrastructure/addons/cluster-autoscaler.yaml
+git add ./k8s/infrastructure/addons/aws-ebs-csi-driver.yaml
 git commit -m "Updating Apps"
 git push &> /dev/null
 
