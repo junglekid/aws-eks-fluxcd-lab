@@ -1,0 +1,22 @@
+{{ range $deployment, $values := .Values.deployments }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $deployment }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ $deployment }}
+  template:
+    metadata:
+      labels:
+        app: {{ $deployment }}
+    spec:
+      serviceAccountName: {{ $values.serviceAccountName }}
+      containers:
+      - name: {{ $deployment }}
+        image: {{ $values.image }}
+        env:
+          - name: QUEUE
+            value: {{ $values.queueName }}
+{{ end }}
