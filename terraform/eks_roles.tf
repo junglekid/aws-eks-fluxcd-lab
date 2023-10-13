@@ -144,36 +144,19 @@ resource "kubernetes_service_account" "ebs_csi_service_account" {
   ]
 }
 
-# SQS
+# Create ISRA Role for SQS
 module "sqs_irsa_role" {
   source = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
 
   role_name             = "${local.eks_iam_role_prefix}-sqs"
   role_policy_arns = {
-    policy = "arn:aws:iam::aws:policy/AmazonSQSFullAccess"
+    policy = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:policy/${local.sqs_name}-policy"
   }
+
   oidc_providers = {
     ex = {
       provider_arn               = module.eks.oidc_provider_arn
       namespace_service_accounts = ["${kubernetes_namespace.sqs_app.metadata[0].name}:${local.eks_sqs_service_account_name}"]
     }
   }
-}
-
-resource "kubernetes_service_account" "sqs_service_account" {
-  metadata {
-    name      = local.eks_sqs_service_account_name
-    namespace = kubernetes_namespace.sqs_app.metadata[0].name
-    labels = {
-      "app.kubernetes.io/name"      = local.eks_sqs_service_account_name
-    }
-    annotations = {
-      "eks.amazonaws.com/role-arn" = module.sqs_irsa_role.iam_role_arn
-    }
-  }
-
-  depends_on = [
-    module.eks,
-    aws_eks_node_group.eks
-  ]
 }

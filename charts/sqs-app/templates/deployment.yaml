@@ -1,9 +1,16 @@
 {{ range $deployment, $values := .Values.deployments }}
+{{- /* guarantees --- is on a newline */ -}}
+{{ printf "\n---" }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ $deployment }}
 spec:
+  replicas: {{ $values.replicas }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
   selector:
     matchLabels:
       app: {{ $deployment }}

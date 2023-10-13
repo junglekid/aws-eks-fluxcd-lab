@@ -260,7 +260,7 @@ resource "kubernetes_secret" "common_gateway" {
   type = "kubernetes.io/tls"
 }
 
-## SQS
+### SQS
 resource "kubernetes_namespace" "sqs_app" {
   metadata {
     annotations = {
@@ -269,4 +269,22 @@ resource "kubernetes_namespace" "sqs_app" {
 
     name = "sqs-app"
   }
+}
+
+resource "kubernetes_service_account" "sqs_service_account" {
+  metadata {
+    name      = local.eks_sqs_service_account_name
+    namespace = kubernetes_namespace.sqs_app.metadata[0].name
+    labels = {
+      "app.kubernetes.io/name"      = local.eks_sqs_service_account_name
+    }
+    annotations = {
+      "eks.amazonaws.com/role-arn" = module.sqs_irsa_role.iam_role_arn
+    }
+  }
+
+  depends_on = [
+    module.eks,
+    aws_eks_node_group.eks
+  ]
 }

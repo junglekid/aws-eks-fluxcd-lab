@@ -1,11 +1,13 @@
 deployments:
 
-  sqs-producer: 
+  sqs-producer:
     image: 704855531002.dkr.ecr.us-west-2.amazonaws.com/eks-fluxcd-lab-sqs-producer:latest
     serviceAccountName: sa-aws-sqs
-    queueName: eks-fluxcd-lab-sqs
+    queueName: eks-fluxcd-lab-sqs-queue
+    replicas: 1
 
   sqs-consumer:
     image: 704855531002.dkr.ecr.us-west-2.amazonaws.com/eks-fluxcd-lab-sqs-consumer:latest
     serviceAccountName: sa-aws-sqs
-    queueName: eks-fluxcd-lab-sqs
+    queueName: eks-fluxcd-lab-sqs-queue
+    replicas: 1
