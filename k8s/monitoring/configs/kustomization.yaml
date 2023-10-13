@@ -3,15 +3,26 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - podmonitor.yaml
-  - grafana.yaml
 configMapGenerator:
   - name: flux-grafana-dashboards
     files:
-      - dashboards/control-plane.json
-      - dashboards/cluster.json
-      - dashboards/logs.json
+      - dashboards/flux/control-plane.json
+      - dashboards/flux/cluster.json
+      - dashboards/flux/logs.json
     options:
       labels:
         grafana_dashboard: "1"
         app.kubernetes.io/part-of: flux
+        app.kubernetes.io/component: monitoring
+  - name: istio-grafana-dashboards
+    files:
+      - dashboards/istio/7630_rev184.json
+      - dashboards/istio/7636_rev184.json
+      - dashboards/istio/7639_rev184.json
+      - dashboards/istio/7645_rev184.json
+      - dashboards/istio/11829_rev184.json
+    options:
+      labels:
+        grafana_dashboard: "1"
+        app.kubernetes.io/part-of: istio
         app.kubernetes.io/component: monitoring
