@@ -31,6 +31,7 @@ locals {
   eks_ebs_csi_service_account_name            = "sa-aws-ebs-csi"
   eks_external_dns_service_account_name       = "sa-external-dns"
   eks_cluster_autoscaler_service_account_name = "sa-cluster-autoscaler"
+  eks_sqs_service_account_name                = "sa-aws-sqs"
 
   # ACM and Route53 Configuration
   public_domain            = "dallin.brewsentry.com"              # Update with your root domain

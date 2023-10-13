@@ -259,3 +259,14 @@ resource "kubernetes_secret" "common_gateway" {
   }
   type = "kubernetes.io/tls"
 }
+
+## SQS
+resource "kubernetes_namespace" "sqs_app" {
+  metadata {
+    annotations = {
+      name = "sqs-app"
+    }
+
+    name = "sqs-app"
+  }
+}
