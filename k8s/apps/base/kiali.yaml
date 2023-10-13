@@ -28,10 +28,18 @@ spec:
         external_services:
           prometheus:
             # Prometheus service name is "metrics" and is in the "telemetry" namespace
-            url: "http://kube-prometheus-stack-prometheus.monitoring:9090/"
+            url: "http://kube-prometheus-stack-prometheus.monitoring.svc:9090/"
           grafana:
+            auth:
+              # ca_file: ""
+              # insecure_skip_verify: false
+              password: "kiali"
+              # token: ""
+              type: "none"
+              # use_kiali_token: false
+              username: "kiali"
             enabled: true
-            in_cluster_url: 'http://kube-prometheus-stack-grafana.monitoring:3000/'
+            in_cluster_url: 'http://kube-prometheus-stack-grafana.monitoring.svc/'
             url: 'https://grafana.dallin.brewsentry.com'
             dashboards:
             - name: "Istio Service Dashboard"
