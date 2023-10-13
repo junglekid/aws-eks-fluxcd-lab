@@ -1,0 +1,28 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: sqs-app
+  namespace: flux-system
+spec:
+  chart:
+    spec:
+      chart: ./charts/sqs-app
+      version: ">=1.0.0"
+      sourceRef:
+        kind: GitRepository
+        name: react-app
+        namespace: flux-system
+  values:
+    deployments:
+      sqs-producer: 
+        image: 704855531002.dkr.ecr.us-west-2.amazonaws.com/eks-fluxcd-lab-sqs-producer:latest
+        serviceAccountName: sa-aws-sqs
+        queueName: eks-fluxcd-lab-sqs
+      sqs-consumer:
+        image: 704855531002.dkr.ecr.us-west-2.amazonaws.com/eks-fluxcd-lab-sqs-consumer:latest
+        serviceAccountName: sa-aws-sqs
+        queueName: eks-fluxcd-lab-sqs
+  interval: 2m0s
+  releaseName: sqs-app
+  targetNamespace: sqs-app
