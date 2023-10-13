@@ -54,7 +54,7 @@ spec:
               - app_label: "istiod"
                 is_core: true
                 is_proxy: false
-              - app_label: "gateway"
+              - app_label: "istio-gateway"
                 is_core: true
                 is_proxy: true
                 namespace: "istio-ingress"
