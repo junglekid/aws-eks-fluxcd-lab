@@ -38,7 +38,7 @@ spec:
             app.kubernetes.io/component: monitoring
     grafana:
       defaultDashboardsEnabled: true
-      adminPassword: flux
+      adminPassword: "Flux&Git0ps"
       replicas: 1
       ingress:
         enabled: true
@@ -55,6 +55,31 @@ spec:
           external-dns.alpha.kubernetes.io/hostname: grafana.dallin.brewsentry.com
         hosts:
         - grafana.dallin.brewsentry.com
+        grafana:
+      dashboardProviders:
+        dashboardproviders.yaml:
+          apiVersion: 1
+          providers:
+          - name: flux
+            orgId: 1
+            type: file
+            folder: flux
+            allowUiUpdates: true
+            disableDeletion: false
+            updateIntervalSeconds: 10
+            editable: true
+            options:
+              path: /tmp/dashboards/flux
+          - name: istio
+            orgId: 1
+            type: file
+            folder: istio
+            allowUiUpdates: true
+            disableDeletion: false
+            updateIntervalSeconds: 10
+            editable: true
+            options:
+              path: /tmp/dashboards/istio
   postRenderers:
     - kustomize:
         patches:

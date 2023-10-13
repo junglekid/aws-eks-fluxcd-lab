@@ -14,6 +14,8 @@ configMapGenerator:
         grafana_dashboard: "1"
         app.kubernetes.io/part-of: flux
         app.kubernetes.io/component: monitoring
+      annotations:
+        k8s-sidecar-target-directory: /tmp/dashboards/flux
   - name: istio-grafana-dashboards
     files:
       - dashboards/istio/7630_rev184.json
@@ -26,3 +28,5 @@ configMapGenerator:
         grafana_dashboard: "1"
         app.kubernetes.io/part-of: istio
         app.kubernetes.io/component: monitoring
+      annotations:
+        k8s-sidecar-target-directory: /tmp/dashboards/istio
