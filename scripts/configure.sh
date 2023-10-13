@@ -82,6 +82,25 @@ replace_in_file 's|SA_AWS_EBS_CSI_IAM_ROLE_ARN|'"$SA_AWS_EBS_CSI_IAM_ROLE_ARN"'|
 replace_in_file 's|AWS_REGION|'"$AWS_REGION"'|g' ./k8s/infrastructure/addons/aws-ebs-csi-driver.yaml
 replace_in_file 's|EKS_CLUSTER_NAME|'"$EKS_CLUSTER_NAME"'|g' ./k8s/infrastructure/addons/aws-ebs-csi-driver.yaml
 
+echo "Downloading Istio Dashboards for Grafana..."
+curl -L -sS -o ./k8s/monitoring/configs/dashboards/istio/istio-extension-dashboard.json \
+ https://raw.githubusercontent.com/istio/istio/master/manifests/addons/dashboards/istio-extension-dashboard.json
+
+curl -L -sS -o ./k8s/monitoring/configs/dashboards/istio/istio-mesh-dashboard.json \
+  https://raw.githubusercontent.com/istio/istio/master/manifests/addons/dashboards/istio-mesh-dashboard.json
+
+curl -L -sS -o ./k8s/monitoring/configs/dashboards/istio/istio-performance-dashboard.json \
+  https://raw.githubusercontent.com/istio/istio/master/manifests/addons/dashboards/istio-performance-dashboard.json
+
+curl -L -sS -o ./k8s/monitoring/configs/dashboards/istio/istio-service-dashboard.json \
+  https://raw.githubusercontent.com/istio/istio/master/manifests/addons/dashboards/istio-service-dashboard.json
+
+curl -L -sS -o ./k8s/monitoring/configs/dashboards/istio/istio-workload-dashboard.json \
+  https://raw.githubusercontent.com/istio/istio/master/manifests/addons/dashboards/istio-workload-dashboard.json
+
+curl -L -sS -o ./k8s/monitoring/configs/dashboards/istio/pilot-dashboard.json \
+  https://raw.githubusercontent.com/istio/istio/master/manifests/addons/dashboards/pilot-dashboard.json
+
 echo ""
 echo "Pushing changes to Git repository..."
 echo ""
@@ -94,6 +113,12 @@ git add ./k8s/infrastructure/addons/aws-load-balancer-controller.yaml
 git add ./k8s/infrastructure/addons/external-dns.yaml
 git add ./k8s/infrastructure/addons/cluster-autoscaler.yaml
 git add ./k8s/infrastructure/addons/aws-ebs-csi-driver.yaml
+git add ./k8s/monitoring/configs/dashboards/istio/istio-extension-dashboard.json
+git add ./k8s/monitoring/configs/dashboards/istio/istio-mesh-dashboard.json
+git add ./k8s/monitoring/configs/dashboards/istio/istio-performance-dashboard.json
+git add ./k8s/monitoring/configs/dashboards/istio/istio-service-dashboard.json
+git add ./k8s/monitoring/configs/dashboards/istio/istio-workload-dashboard.json
+git add ./k8s/monitoring/configs/dashboards/istio/pilot-dashboard.json
 git commit -m "Updating Apps"
 git push &> /dev/null
 
