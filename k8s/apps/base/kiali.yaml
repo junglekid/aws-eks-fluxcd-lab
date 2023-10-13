@@ -22,13 +22,30 @@ spec:
     #     memory: 512Mi
     # replicaCount: 6
     cr:
-       create: true
-       namespace: istio-system
-       spec:
+        create: true
+        namespace: istio-system
+        spec:
           external_services:
             prometheus:
               # Prometheus service name is "metrics" and is in the "telemetry" namespace
               url: "http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090/"
+          istio:
+            component_status:
+              components:
+              - app_label: "istiod"
+                is_core: true
+                is_proxy: false
+              - app_label: "gateway"
+                is_core: true
+                is_proxy: true
+                # default: namespace is undefined
+                namespace: istio-ingress
+              # - app_label: "istio-egressgateway"
+              #   is_core: false
+              #   is_proxy: true
+              #   # default: namespace is undefined
+              #   namespace: istio-system
+              enabled: true
   interval: 2m0s
   releaseName: kiali
   targetNamespace: kiali-operator
