@@ -59,7 +59,8 @@ spec:
                 is_proxy: true
                 namespace: "istio-ingress"
               enabled: true
-
+          tracing:
+            enable: false
   interval: 2m0s
   releaseName: kiali
   targetNamespace: kiali-operator
