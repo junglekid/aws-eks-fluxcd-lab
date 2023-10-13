@@ -117,7 +117,7 @@ spec:
             updateIntervalSeconds: 10
             editable: true
             options:
-              path: /tmp/dashboards/flux
+              path: /tmp/dashboards/Flux
           - name: Istio
             orgId: 1
             type: file
@@ -127,7 +127,12 @@ spec:
             updateIntervalSeconds: 10
             editable: true
             options:
-              path: /tmp/dashboards/istio
+              path: /tmp/dashboards/Istio
+      # dashboards:
+      #   loki:
+      #     loki-stack-monitoring:
+      #       gnetId: 14055
+      #       datasource: prometheus
   postRenderers:
     - kustomize:
         patches:
