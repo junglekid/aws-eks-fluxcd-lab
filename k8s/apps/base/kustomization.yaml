@@ -4,4 +4,4 @@ resources:
   - podinfo.yaml
   - weave-gitops.yaml
   - react-app.yaml
-  - sqs-app.yaml
+  # - sqs-app.yaml
