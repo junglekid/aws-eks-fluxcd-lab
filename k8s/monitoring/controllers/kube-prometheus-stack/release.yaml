@@ -6,7 +6,7 @@ spec:
   interval: 1h
   chart:
     spec:
-      version: ">=48.x"
+      version: "51.x"
       chart: kube-prometheus-stack
       sourceRef:
         kind: HelmRepository
@@ -23,19 +23,58 @@ spec:
   # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
   values:
     alertmanager:
-      enabled: false
+      enabled: true
+      storage:
+        volumeClaimTemplate:
+          spec:
+            storageClassName: gp2
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 50Gi
     prometheus:
       prometheusSpec:
         replicas: 1
-        retention: 24h
-        resources:
-          requests:
-            cpu: 200m
-            memory: 200Mi
+        retention: 45d
+        # resources:
+        #   requests:
+        #     cpu: 200m
+        #     memory: 200Mi
         podMonitorNamespaceSelector: { }
         podMonitorSelector:
           matchLabels:
             app.kubernetes.io/component: monitoring
+        additionalScrapeConfigs:
+        - job_name: 'istiod'
+          kubernetes_sd_configs:
+          - role: endpoints
+            namespaces:
+              names:
+              - istio-system
+          relabel_configs:
+          - source_labels: [__meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
+            action: keep
+            regex: istiod;http-monitoring
+        - job_name: 'envoy-stats'
+          metrics_path: /stats/prometheus
+          kubernetes_sd_configs:
+          - role: pod
+          relabel_configs:
+          - source_labels: [__meta_kubernetes_pod_container_port_name]
+            action: keep
+            regex: '.*-envoy-prom'
+        storageSpec:
+        volumeClaimTemplate:
+          spec:
+            storageClassName: gp2
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 200Gi
+    defaultRules:
+      create: true
+      rules:
+        windows: false
     grafana:
       defaultDashboardsEnabled: true
       adminPassword: "Flux&Git0ps"
@@ -55,25 +94,30 @@ spec:
           external-dns.alpha.kubernetes.io/hostname: grafana.dallin.brewsentry.com
         hosts:
         - grafana.dallin.brewsentry.com
-        grafana:
+      persistence:
+        type: pvc
+        enabled: true
+        storageClassName: gp2
+        accessModes: ["ReadWriteOnce"]
+        size: 20Gi
       dashboardProviders:
         dashboardproviders.yaml:
           apiVersion: 1
           providers:
-          - name: flux
+          - name: Flux
             orgId: 1
             type: file
-            folder: flux
+            folder: Flux
             allowUiUpdates: true
             disableDeletion: false
             updateIntervalSeconds: 10
             editable: true
             options:
               path: /tmp/dashboards/flux
-          - name: istio
+          - name: Istio
             orgId: 1
             type: file
-            folder: istio
+            folder: Istio
             allowUiUpdates: true
             disableDeletion: false
             updateIntervalSeconds: 10
