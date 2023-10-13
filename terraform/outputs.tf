@@ -22,6 +22,14 @@ output "ecr_repo_url" {
   value = module.ecr.repository_url
 }
 
+output "ecr_sqs_consumer_repo_url" {
+  value = module.ecr_sqs_consumer.repository_url
+}
+
+output "ecr_sqs_producer_repo_url" {
+  value = module.ecr_sqs_producer.repository_url
+}
+
 # Output EKS Service Account for AWS Load Balancer Controller
 output "eks_sa_alb_name" {
   value = kubernetes_service_account.alb_service_account.metadata[0].name
@@ -94,4 +102,16 @@ output "grafana_domain_name" {
 
 output "grafana_acm_certificate_arn" {
   value = aws_acm_certificate_validation.grafana.certificate_arn
+}
+
+output "sqs_queue_url" {
+  value = module.sqs.queue_url
+}
+
+output "sqs_queue_arn" {
+  value = module.sqs.queue_arn
+}
+
+output "sqs_queue_name" {
+  value = module.sqs.queue_name
 }

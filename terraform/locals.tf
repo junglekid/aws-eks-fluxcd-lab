@@ -18,6 +18,10 @@ locals {
 
   # ECR Configuration
   ecr_repo_name = "eks-fluxcd-lab-react-app"
+  ecr_sqs_repo_name = "eks-fluxcd-lab-sqs"
+
+  # SQS Configuration
+  sqs_name = "eks-fluxcd-lab-sqs"
 
   # EKS Configuration
   eks_cluster_name                            = "eks-fluxcd-lab"
