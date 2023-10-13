@@ -17,17 +17,17 @@ configMapGenerator:
         app.kubernetes.io/component: monitoring
       annotations:
         k8s-sidecar-target-directory: /tmp/dashboards/Flux
-  - name: istio-grafana-dashboards
-    files:
-      - dashboards/istio/7630_rev184.json
-      - dashboards/istio/7636_rev184.json
-      - dashboards/istio/7639_rev184.json
-      - dashboards/istio/7645_rev184.json
-      - dashboards/istio/11829_rev184.json
-    options:
-      labels:
-        grafana_dashboard: "1"
-        app.kubernetes.io/part-of: istio
-        app.kubernetes.io/component: monitoring
-      annotations:
-        k8s-sidecar-target-directory: /tmp/dashboards/Istio
+  # - name: istio-grafana-dashboards
+  #   files:
+  #     - dashboards/istio/7630_rev184.json
+  #     - dashboards/istio/7636_rev184.json
+  #     - dashboards/istio/7639_rev184.json
+  #     - dashboards/istio/7645_rev184.json
+  #     - dashboards/istio/11829_rev184.json
+  #   options:
+  #     labels:
+  #       grafana_dashboard: "1"
+  #       app.kubernetes.io/part-of: istio
+  #       app.kubernetes.io/component: monitoring
+  #     annotations:
+  #       k8s-sidecar-target-directory: /tmp/dashboards/Istio
