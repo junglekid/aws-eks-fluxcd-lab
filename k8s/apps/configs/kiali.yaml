@@ -5,7 +5,7 @@ metadata:
   annotations:
     alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig":
       { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
-    alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:us-west-2:704855531002:certificate/796982ad-37f1-45c7-ad3e-4f7565dbb228"
+    alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:us-west-2:704855531002:certificate/1f0773fc-d7d2-4ffd-9b7c-d300addcc2e6"
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/ssl-redirect: "443"
@@ -14,17 +14,17 @@ metadata:
     alb.ingress.kubernetes.io/healthcheck-port: status-port
     alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
     alb.ingress.kubernetes.io/backend-protocol: HTTPS
-    external-dns.alpha.kubernetes.io/hostname: "react-app.dallin.brewsentry.com"
-  name: react-app-ingress
+    external-dns.alpha.kubernetes.io/hostname: "kiali.dallin.brewsentry.com"
+  name: kiali-ingress
   namespace: istio-ingress
 spec:
   ingressClassName: alb
   tls:
   - hosts:
-    - react-app.dallin.brewsentry.com
-    secretName: react-app-tls
+    - kiali.dallin.brewsentry.com
+    secretName: kiali-tls
   rules:
-  - host: react-app.dallin.brewsentry.com
+  - host: kiali.dallin.brewsentry.com
     http:
       paths:
       - backend:
@@ -38,19 +38,19 @@ spec:
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: react-app-vs
-  namespace: react-app
+  name: kiali-vs
+  namespace: istio-system
 spec:
   hosts:
-  - "react-app.dallin.brewsentry.com"
+  - "kiali.dallin.brewsentry.com"
   gateways:
   - istio-ingress/common-gateway
   http:
   - route:
-     - destination:
-        host: react-app
+    - destination:
+        host: kiali
         port:
-          number: 5000
+          number: 20001
     match:
     - uri:
         prefix: /

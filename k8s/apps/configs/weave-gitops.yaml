@@ -42,15 +42,15 @@ metadata:
   namespace: weave-gitops
 spec:
   hosts:
-    - "weave-gitops.dallin.brewsentry.com"
+  - "weave-gitops.dallin.brewsentry.com"
   gateways:
-    - istio-ingress/common-gateway
+  - istio-ingress/common-gateway
   http:
-    - route:
-        - destination:
-            host: weave-gitops
-            port:
-              number: 9001
-      match:
-        - uri:
-            prefix: /
+  - route:
+    - destination:
+        host: weave-gitops
+        port:
+          number: 9001
+    match:
+    - uri:
+        prefix: /

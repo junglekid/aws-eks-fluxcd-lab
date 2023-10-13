@@ -5,3 +5,4 @@ resources:
   - podinfo.yaml
   - weave-gitops.yaml
   - react-app.yaml
+  - kiali.yaml

@@ -42,15 +42,15 @@ metadata:
   namespace: podinfo
 spec:
   hosts:
-    - "podinfo.dallin.brewsentry.com"
+  - "podinfo.dallin.brewsentry.com"
   gateways:
-    - istio-ingress/common-gateway
+  - istio-ingress/common-gateway
   http:
-    - route:
-        - destination:
-            host: podinfo
-            port:
-              number: 9898
-      match:
-        - uri:
-            prefix: /
+  - route:
+    - destination:
+        host: podinfo
+        port:
+          number: 9898
+    match:
+    - uri:
+        prefix: /

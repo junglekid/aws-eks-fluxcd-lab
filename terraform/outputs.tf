@@ -104,6 +104,14 @@ output "grafana_acm_certificate_arn" {
   value = aws_acm_certificate_validation.grafana.certificate_arn
 }
 
+output "kiali_domain_name" {
+  value = local.kiali_domain_name
+}
+
+output "kiali_acm_certificate_arn" {
+  value = aws_acm_certificate_validation.kiali.certificate_arn
+}
+
 output "sqs_queue_url" {
   value = module.sqs.queue_url
 }
