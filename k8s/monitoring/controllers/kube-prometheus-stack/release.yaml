@@ -100,6 +100,10 @@ spec:
         storageClassName: gp2
         accessModes: ["ReadWriteOnce"]
         size: 20Gi
+      sidecar:
+        dashboards:
+          provider:
+            foldersFromFilesStructure: true
       dashboardProviders:
         dashboardproviders.yaml:
           apiVersion: 1
