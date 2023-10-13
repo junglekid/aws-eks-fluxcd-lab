@@ -28,7 +28,7 @@ spec:
           external_services:
             prometheus:
               # Prometheus service name is "metrics" and is in the "telemetry" namespace
-              url: "http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090/"
+              url: "http://kube-prometheus-stack-prometheus.monitoring:9090/"
           istio:
             component_status:
               components:
@@ -39,13 +39,26 @@ spec:
                 is_core: true
                 is_proxy: true
                 # default: namespace is undefined
-                namespace: istio-ingress
+                namespace: "istio-ingress"
               # - app_label: "istio-egressgateway"
               #   is_core: false
               #   is_proxy: true
               #   # default: namespace is undefined
               #   namespace: istio-system
               enabled: true
+          grafana:
+            enabled: true
+            # Grafana service name is "grafana" and is in the "telemetry" namespace.
+            in_cluster_url: 'http://kube-prometheus-stack-grafana.monitoring:3000/'
+            # Public facing URL of Grafana
+            url: 'https://grafana.dallin.brewsentry.com'
+            dashboards:
+            - name: "Istio Service Dashboard"
+            - name: "Istio Workload Dashboard"
+            - name: "Istio Mesh Dashboard"
+            - name: "Istio Control Plane Dashboard"
+            - name: "Istio Performance Dashboard"
+            - name: "Istio Wasm Extension Dashboard"
   interval: 2m0s
   releaseName: kiali
   targetNamespace: kiali-operator
