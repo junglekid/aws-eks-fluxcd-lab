@@ -9,7 +9,6 @@ configMapGenerator:
       - dashboards/flux/control-plane.json
       - dashboards/flux/cluster.json
       - dashboards/flux/logs.json
-      - dashboards/flux/16714_rev1.json
     options:
       labels:
         grafana_dashboard: "1"
@@ -17,17 +16,18 @@ configMapGenerator:
         app.kubernetes.io/component: monitoring
       annotations:
         k8s-sidecar-target-directory: /tmp/dashboards/Flux
-  # - name: istio-grafana-dashboards
-  #   files:
-  #     - dashboards/istio/7630_rev184.json
-  #     - dashboards/istio/7636_rev184.json
-  #     - dashboards/istio/7639_rev184.json
-  #     - dashboards/istio/7645_rev184.json
-  #     - dashboards/istio/11829_rev184.json
-  #   options:
-  #     labels:
-  #       grafana_dashboard: "1"
-  #       app.kubernetes.io/part-of: istio
-  #       app.kubernetes.io/component: monitoring
-  #     annotations:
-  #       k8s-sidecar-target-directory: /tmp/dashboards/Istio
+  - name: istio-grafana-dashboards
+    files:
+      - dashboards/istio/istio-extension-dashboard.json
+      - dashboards/istio/istio-mesh-dashboard.json
+      - dashboards/istio/istio-performance-dashboard.json
+      - dashboards/istio/istio-service-dashboard.json
+      - dashboards/istio/istio-workload-dashboard.json
+      - dashboards/istio/pilot-dashboard.json
+    options:
+      labels:
+        grafana_dashboard: "1"
+        app.kubernetes.io/part-of: istio
+        app.kubernetes.io/component: monitoring
+      annotations:
+        k8s-sidecar-target-directory: /tmp/dashboards/Istio

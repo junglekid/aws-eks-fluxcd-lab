@@ -128,23 +128,6 @@ spec:
           #   editable: true
           #   options:
           #     path: /tmp/dashboards/Istio
-          - name: 'default'
-            orgId: 1
-            folder: ''
-            type: file
-            disableDeletion: false
-            updateIntervalSeconds: 10
-            allowUiUpdates: true
-            editable: true
-            options:
-              path: /tmp/dashboards/default
-      dashboards:
-        default:
-          imported-dashboard-name:
-            gnetId: 7636
-            datasource: Prometheus
-          istio1:
-            url: https://raw.githubusercontent.com/istio/istio/master/manifests/addons/dashboards/istio-extension-dashboard.json
 
   postRenderers:
     - kustomize:
