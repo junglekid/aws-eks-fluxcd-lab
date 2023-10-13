@@ -104,31 +104,6 @@ spec:
         dashboards:
           provider:
             foldersFromFilesStructure: true
-      dashboardProviders:
-        dashboardproviders.yaml:
-          apiVersion: 1
-          providers:
-          - name: Flux
-            orgId: 1
-            type: file
-            folder: Flux
-            allowUiUpdates: true
-            disableDeletion: false
-            updateIntervalSeconds: 10
-            editable: true
-            options:
-              path: /tmp/dashboards/Flux
-          # - name: Istio
-          #   orgId: 1
-          #   type: file
-          #   folder: Istio
-          #   allowUiUpdates: true
-          #   disableDeletion: false
-          #   updateIntervalSeconds: 10
-          #   editable: true
-          #   options:
-          #     path: /tmp/dashboards/Istio
-
   postRenderers:
     - kustomize:
         patches:
