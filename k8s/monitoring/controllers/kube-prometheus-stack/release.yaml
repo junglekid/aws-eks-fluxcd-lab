@@ -128,21 +128,6 @@ spec:
             editable: true
             options:
               path: /tmp/dashboards/Istio
-          - name: fluxcd
-            orgId: 1
-            type: file
-            folder: FluxCD
-            allowUiUpdates: true
-            disableDeletion: false
-            updateIntervalSeconds: 10
-            editable: true
-            options:
-              path: /tmp/dashboards/FluxCD
-      dashboards:
-        fluxcd:
-          fluxcd-dashboard:
-            gnetId: 16714
-            datasource: prometheus
   postRenderers:
     - kustomize:
         patches:

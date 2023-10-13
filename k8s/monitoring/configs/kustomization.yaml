@@ -9,6 +9,7 @@ configMapGenerator:
       - dashboards/flux/control-plane.json
       - dashboards/flux/cluster.json
       - dashboards/flux/logs.json
+      - dashboards/flux/16714_rev1.json
     options:
       labels:
         grafana_dashboard: "1"
