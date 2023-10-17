@@ -29,6 +29,8 @@ spec:
       create: true
       username: admin
       passwordHash: $2a$10$z6BEJcTqCTgxlYr3YLOwo.TO4PhKPHagHWNVDItGwfyuJa/2EfM3K
+    metrics:
+      enabled: true
     # ingress:
     #   enabled: true
     #   className: "alb"
