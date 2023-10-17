@@ -8,7 +8,7 @@ metadata:
 spec:
   chart:
     spec:
-      chart: keca
+      chart: keda
       sourceRef:
         kind: HelmRepository
         name: keda
