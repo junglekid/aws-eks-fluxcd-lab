@@ -21,11 +21,14 @@ spec:
       limits:
         memory: 512Mi
     hpa:
-      enabled:
+      enabled: true
       maxReplicas: 10
     redis:
       enabled: true
     replicaCount: 2
+    serviceMonitor:
+      enabled: true
+    backend: http://backend:9898/echo
     # ingress:
     #   enabled: true
     #   className: "alb"
