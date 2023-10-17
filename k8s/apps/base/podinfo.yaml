@@ -105,6 +105,7 @@ spec:
         prometheus.io/scrape: "true"
       labels:
         app: backend
+        version: "6.5.2"
     spec:
       containers:
       - command:
@@ -245,6 +246,7 @@ spec:
         prometheus.io/scrape: "true"
       labels:
         app: frontend
+        version: "6.5.2"
     spec:
       containers:
       - command:
@@ -305,12 +307,12 @@ metadata:
   name: backend
   namespace: podinfo
 spec:
-  maxReplicas: 2
+  maxReplicas: 6
   metrics:
   - resource:
       name: cpu
       target:
-        averageUtilization: 99
+        averageUtilization: 80
         type: Utilization
     type: Resource
   minReplicas: 1
@@ -328,12 +330,12 @@ metadata:
   name: frontend
   namespace: podinfo
 spec:
-  maxReplicas: 4
+  maxReplicas: 8
   metrics:
   - resource:
       name: cpu
       target:
-        averageUtilization: 99
+        averageUtilization: 80
         type: Utilization
     type: Resource
   minReplicas: 1
