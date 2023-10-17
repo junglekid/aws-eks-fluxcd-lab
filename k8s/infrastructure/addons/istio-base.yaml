@@ -6,8 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/part-of: istio
 spec:
-  interval: 5m
-  releaseName: istio-base
+
   install:
     crds: CreateReplace
   upgrade:
@@ -19,5 +18,6 @@ spec:
         kind: HelmRepository
         name: istio
         namespace: flux-system
-      interval: 1m
+  interval: 2m0s
+  releaseName: istio-base
   targetNamespace: istio-system

@@ -20,7 +20,12 @@ spec:
         memory: 128Mi
       limits:
         memory: 512Mi
-    replicaCount: 6
+    hpa:
+      enabled:
+      maxReplicas: 10
+    redis:
+      enabled: true
+    replicaCount: 2
     # ingress:
     #   enabled: true
     #   className: "alb"

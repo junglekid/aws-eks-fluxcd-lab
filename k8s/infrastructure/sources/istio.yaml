@@ -7,5 +7,5 @@ metadata:
   labels:
     app.kubernetes.io/part-of: istio
 spec:
-  interval: 5m
+  interval: 5m0s
   url: https://istio-release.storage.googleapis.com/charts
