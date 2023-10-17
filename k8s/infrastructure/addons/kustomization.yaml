@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - aws-load-balancer-controller.yaml
   - aws-ebs-csi-driver.yaml
+  - aws-efs-csi-driver.yaml
   - external-dns.yaml
   - metrics-server.yaml
   - cluster-autoscaler.yaml
