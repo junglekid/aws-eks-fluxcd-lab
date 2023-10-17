@@ -3,8 +3,8 @@ kind: Kustomization
 namespace: flux-system
 resources:
   - eks-charts.yaml
-  - aws-ebs-csi-driver.yaml
-  - aws-efs-csi-driver.yaml
+  # - aws-ebs-csi-driver.yaml
+  # - aws-efs-csi-driver.yaml
   - external-dns.yaml
   - metrics-server.yaml
   - cluster-autoscaler.yaml
