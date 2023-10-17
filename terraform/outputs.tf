@@ -1,8 +1,3 @@
-# # Output Color URL
-# output "color_url" {
-#   value = "https://${local.custom_domain_name}"
-# }
-
 # Output AWS Region
 output "aws_region" {
   value = local.aws_region
@@ -55,14 +50,6 @@ output "eks_sa_cluster_autoscaler_name" {
 
 output "eks_sa_cluster_autoscaler_iam_role_arn" {
   value = module.cluster_autoscaler_irsa_role.iam_role_arn
-}
-
-output "eks_sa_ebs_csi_name" {
-  value = kubernetes_service_account.ebs_csi_service_account.metadata[0].name
-}
-
-output "eks_sa_ebs_csi_iam_role_arn" {
-  value = module.ebs_csi_irsa_role.iam_role_arn
 }
 
 # Output Domain Filter for External DNS
@@ -122,4 +109,8 @@ output "sqs_queue_arn" {
 
 output "sqs_queue_name" {
   value = module.sqs.queue_name
+}
+
+output "route53_zone_arn" {
+  value = local.route53_zone_arn
 }

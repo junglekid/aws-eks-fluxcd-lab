@@ -47,7 +47,7 @@ resource "tls_self_signed_cert" "podinfo" {
   private_key_pem = tls_private_key.podinfo.private_key_pem
 
   subject {
-    common_name  = local.podinfo_domain_name
+    common_name = local.podinfo_domain_name
   }
 
   validity_period_hours = 8760
@@ -62,7 +62,7 @@ resource "tls_self_signed_cert" "podinfo" {
 
 resource "kubernetes_secret" "podinfo_istio" {
   metadata {
-    name = "podinfo-tls"
+    name      = "podinfo-tls"
     namespace = kubernetes_namespace.istio_ingress.metadata[0].name
   }
   data = {
@@ -96,7 +96,7 @@ resource "tls_self_signed_cert" "react_app" {
   private_key_pem = tls_private_key.react_app.private_key_pem
 
   subject {
-    common_name  = local.react_app_domain_name
+    common_name = local.react_app_domain_name
   }
 
   validity_period_hours = 8760
@@ -111,7 +111,7 @@ resource "tls_self_signed_cert" "react_app" {
 
 resource "kubernetes_secret" "react_app_istio" {
   metadata {
-    name = "react-app-tls"
+    name      = "react-app-tls"
     namespace = kubernetes_namespace.istio_ingress.metadata[0].name
   }
   data = {
@@ -145,7 +145,7 @@ resource "tls_self_signed_cert" "weave_gitops" {
   private_key_pem = tls_private_key.weave_gitops.private_key_pem
 
   subject {
-    common_name  = local.weave_gitops_domain_name
+    common_name = local.weave_gitops_domain_name
   }
 
   validity_period_hours = 8760
@@ -160,7 +160,7 @@ resource "tls_self_signed_cert" "weave_gitops" {
 
 resource "kubernetes_secret" "weave_gitops_istio" {
   metadata {
-    name = "weave-gitops-tls"
+    name      = "weave-gitops-tls"
     namespace = kubernetes_namespace.istio_ingress.metadata[0].name
   }
   data = {
@@ -194,7 +194,7 @@ resource "tls_self_signed_cert" "grafana" {
   private_key_pem = tls_private_key.grafana.private_key_pem
 
   subject {
-    common_name  = local.grafana_domain_name
+    common_name = local.grafana_domain_name
   }
 
   validity_period_hours = 8760
@@ -209,7 +209,7 @@ resource "tls_self_signed_cert" "grafana" {
 
 resource "kubernetes_secret" "grafana_istio" {
   metadata {
-    name = "grafana-tls"
+    name      = "grafana-tls"
     namespace = kubernetes_namespace.istio_ingress.metadata[0].name
   }
   data = {
@@ -229,7 +229,7 @@ resource "tls_self_signed_cert" "common_gateway" {
   private_key_pem = tls_private_key.common_gateway.private_key_pem
 
   subject {
-    common_name  = local.podinfo_domain_name
+    common_name = local.podinfo_domain_name
   }
 
   validity_period_hours = 8760
@@ -250,7 +250,7 @@ resource "tls_self_signed_cert" "common_gateway" {
 
 resource "kubernetes_secret" "common_gateway" {
   metadata {
-    name = "common-gateway-tls"
+    name      = "common-gateway-tls"
     namespace = kubernetes_namespace.istio_ingress.metadata[0].name
   }
   data = {
@@ -280,7 +280,7 @@ resource "kubernetes_service_account" "sqs_service_account" {
     name      = local.eks_sqs_service_account_name
     namespace = kubernetes_namespace.sqs_app.metadata[0].name
     labels = {
-      "app.kubernetes.io/name"      = local.eks_sqs_service_account_name
+      "app.kubernetes.io/name" = local.eks_sqs_service_account_name
     }
     annotations = {
       "eks.amazonaws.com/role-arn" = module.sqs_irsa_role.iam_role_arn
@@ -317,7 +317,7 @@ resource "tls_self_signed_cert" "kiali" {
   private_key_pem = tls_private_key.kiali.private_key_pem
 
   subject {
-    common_name  = local.kiali_domain_name
+    common_name = local.kiali_domain_name
   }
 
   validity_period_hours = 8760
@@ -332,7 +332,7 @@ resource "tls_self_signed_cert" "kiali" {
 
 resource "kubernetes_secret" "kiali_istio" {
   metadata {
-    name = "kiali-tls"
+    name      = "kiali-tls"
     namespace = kubernetes_namespace.istio_ingress.metadata[0].name
   }
   data = {
@@ -340,4 +340,34 @@ resource "kubernetes_secret" "kiali_istio" {
     "tls.key" = tls_private_key.kiali.private_key_pem
   }
   type = "kubernetes.io/tls"
+}
+
+### Keda
+resource "kubernetes_namespace" "keda" {
+  metadata {
+    annotations = {
+      name = "keda"
+    }
+
+    # labels = {
+    #   istio-injection = "enabled"
+    # }
+
+    name = "keda"
+  }
+}
+
+resource "kubernetes_storage_class" "example" {
+  metadata {
+    name = "ebs-sc"
+  }
+
+  storage_provisioner    = "kubernetes.io/aws-ebs"
+  allow_volume_expansion = true
+  reclaim_policy         = "Retain"
+  volume_binding_mode    = "WaitForFirstConsumer"
+
+  parameters = {
+    type = "gp2"
+  }
 }

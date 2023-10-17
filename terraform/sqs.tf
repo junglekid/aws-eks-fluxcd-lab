@@ -1,5 +1,5 @@
 module "sqs" {
-  source  = "terraform-aws-modules/sqs/aws"
+  source = "terraform-aws-modules/sqs/aws"
 
   name = "${local.sqs_name}-queue"
   # dlq_name = "${local.sqs_name}-dead-letter-queue"
@@ -18,13 +18,13 @@ resource "aws_iam_policy" "sqs" {
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
-     {
+      {
         Action = [
           "sqs:DeleteMessage",
           "sqs:SendMessage",
           "sqs:CreateQueue"
         ]
-        Effect   = "Allow",
+        Effect = "Allow",
         Resource = [
           module.sqs.queue_arn,
           module.sqs.dead_letter_queue_arn

@@ -37,7 +37,7 @@ module "ecr" {
     ]
   })
   repository_force_delete = true
-  depends_on = [module.vpc]
+  depends_on              = [module.vpc]
 }
 
 module "ecr_sqs_consumer" {
@@ -78,7 +78,7 @@ module "ecr_sqs_consumer" {
     ]
   })
   repository_force_delete = true
-  depends_on = [module.vpc]
+  depends_on              = [module.vpc]
 }
 
 module "ecr_sqs_producer" {
@@ -119,5 +119,5 @@ module "ecr_sqs_producer" {
     ]
   })
   repository_force_delete = true
-  depends_on = [module.vpc]
+  depends_on              = [module.vpc]
 }
