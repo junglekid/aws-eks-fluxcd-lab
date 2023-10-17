@@ -8,3 +8,4 @@ resources:
   - metrics-server.yaml
   - cluster-autoscaler.yaml
   - istio.yaml
+  - keda.yaml
