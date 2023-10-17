@@ -40,10 +40,10 @@ spec:
         #   requests:
         #     cpu: 200m
         #     memory: 200Mi
-        # podMonitorNamespaceSelector: { }
-        # podMonitorSelector:
-        #   matchLabels:
-        #     app.kubernetes.io/component: monitoring
+        podMonitorNamespaceSelector: { }
+        podMonitorSelector:
+          matchLabels:
+            app.kubernetes.io/component: monitoring
         additionalScrapeConfigs:
         - job_name: 'istiod'
           kubernetes_sd_configs:
