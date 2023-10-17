@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - network-policies.yaml
   - istio-common-gateway.yaml
+  - istio-peerauthentication.yaml
