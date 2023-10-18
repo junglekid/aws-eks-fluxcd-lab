@@ -357,6 +357,17 @@ resource "kubernetes_namespace" "keda" {
   }
 }
 
+# resource "kubernetes_secret" "sqs_arn" {
+#   metadata {
+#     name = "sqs-app-arn"
+#     namespace = kubernetes_namespace.sqs_app.metadata[0].name
+#   }
+
+#   data = {
+#     AWS_ROLE_ARN = module.sqs_irsa_role.iam_role_arn
+#   }
+# }
+
 resource "kubernetes_storage_class" "ebs" {
   metadata {
     name = "ebs-sc"

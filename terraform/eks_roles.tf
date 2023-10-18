@@ -159,7 +159,7 @@ module "sqs_irsa_role" {
 
   role_name = "${local.eks_iam_role_prefix}-sqs"
   role_policy_arns = {
-    policy = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:policy/${local.sqs_name}-policy"
+    policy = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:policy/${local.sqs_name}-policy",
   }
 
   oidc_providers = {
@@ -168,4 +168,28 @@ module "sqs_irsa_role" {
       namespace_service_accounts = ["${kubernetes_namespace.sqs_app.metadata[0].name}:${local.eks_sqs_service_account_name}"]
     }
   }
+
+  depends_on = [
+    aws_iam_policy.sqs
+  ]
+}
+
+module "sqs_keda_irsa_role" {
+  source = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+
+  role_name = "${local.eks_iam_role_prefix}-sqs-keda"
+  role_policy_arns = {
+    policy = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:policy/${local.sqs_name}-keda-policy",
+  }
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["${kubernetes_namespace.keda.metadata[0].name}:keda-operator"]
+    }
+  }
+
+  depends_on = [
+    aws_iam_policy.sqs-keda
+  ]
 }

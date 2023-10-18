@@ -114,3 +114,7 @@ output "sqs_queue_name" {
 output "route53_zone_arn" {
   value = local.route53_zone_arn
 }
+
+output "eks_sqs_keda_irsa_role" {
+  value = module.sqs_keda_irsa_role.iam_role_arn
+}

@@ -19,10 +19,44 @@ resource "aws_iam_policy" "sqs" {
     Version = "2012-10-17"
     Statement = [
       {
+        Sid = "SQS"
         Action = [
           "sqs:DeleteMessage",
           "sqs:SendMessage",
           "sqs:CreateQueue",
+          "sqs:GetQueueAttributes"
+        ]
+        # Action = ["sqs:*"]
+        Effect = "Allow",
+        Resource = [
+          module.sqs.queue_arn,
+          module.sqs.dead_letter_queue_arn
+        ],
+      },
+      # {
+      #   # Sid    = "AssumeRole"
+      #   Action = ["sts:AssumeRole"]
+      #   Effect = "Allow",
+      #   Resource = [
+      #     module.sqs.queue_arn,
+      #     module.sqs.dead_letter_queue_arn
+      #   ],
+      #   Principal = { "AWS" = module.sqs_irsa_role.iam_role_arn }
+      # },
+    ]
+  })
+}
+
+resource "aws_iam_policy" "sqs-keda" {
+  name        = "${local.sqs_name}-keda-policy"
+  description = "Policy for EKS sqs_app to access SQS Queue"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid = "SQS"
+        Action = [
           "sqs:GetQueueAttributes"
         ]
         Effect = "Allow",

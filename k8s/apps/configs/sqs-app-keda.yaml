@@ -1,26 +1,25 @@
+---
 apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
  name: aws-sqs-queue-scaledobject
  namespace: sqs-app
 spec:
-#  fallback:
-#  failureThreshold: 5
- minReplicaCount: 1
- maxReplicaCount: 10
- pollingInterval: 15
- scaleTargetRef:
-   name: sqs-app
-replicas: 2
-triggers:
-- type: aws-sqs-queue
-  authenticationRef:
-    name: keda-trigger-auth-aws-credentials
-  metadata:
-    queueURL: https://sqs.us-west-2.amazonaws.com/704855531002/eks-fluxcd-lab-sqs-queue
-    queueLength: "5"
-    awsRegion: "us-west-2"
-    identityOwner: pod
+  minReplicaCount: 0
+  maxReplicaCount: 100
+  pollingInterval: 15
+  cooldownPeriod:  30
+  scaleTargetRef:
+    name: sqs-consumer
+  triggers:
+  - type: aws-sqs-queue
+    authenticationRef:
+      name: keda-trigger-auth-aws-credentials
+    metadata:
+      queueURL: https://sqs.us-west-2.amazonaws.com/704855531002/eks-fluxcd-lab-sqs-queue
+      queueLength: "5"
+      awsRegion: "us-west-2"
+      identityOwner: operator
 ---
 apiVersion: keda.sh/v1alpha1
 kind: TriggerAuthentication
