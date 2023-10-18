@@ -24,6 +24,8 @@ spec:
       - name: {{ $deployment }}
         image: {{ $values.image }}
         env:
-          - name: QUEUE
-            value: {{ $values.queueName }}
+          - name: SQS_QUEUE_NAME
+            value: {{ $values.sqsQueueName }}
+          - name: SLEEP_WAIT
+            value: {{ $values.sleepWait}}
 {{ end }}

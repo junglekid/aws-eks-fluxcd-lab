@@ -26,23 +26,12 @@ resource "aws_iam_policy" "sqs" {
           "sqs:CreateQueue",
           "sqs:GetQueueAttributes"
         ]
-        # Action = ["sqs:*"]
         Effect = "Allow",
         Resource = [
           module.sqs.queue_arn,
           module.sqs.dead_letter_queue_arn
         ],
       },
-      # {
-      #   # Sid    = "AssumeRole"
-      #   Action = ["sts:AssumeRole"]
-      #   Effect = "Allow",
-      #   Resource = [
-      #     module.sqs.queue_arn,
-      #     module.sqs.dead_letter_queue_arn
-      #   ],
-      #   Principal = { "AWS" = module.sqs_irsa_role.iam_role_arn }
-      # },
     ]
   })
 }
