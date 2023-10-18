@@ -5,3 +5,4 @@ resources:
   - react-app.yaml
   - weave-gitops.yaml
   - kiali.yaml
+  - sqs-app-keda.yaml

@@ -36,7 +36,7 @@ spec:
             auth:
               # ca_file: ""
               # insecure_skip_verify: false
-              password: "kiali"
+              password: "Grafana&Git0ps"
               # token: ""
               type: "none"
               # use_kiali_token: false
