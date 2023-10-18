@@ -5,4 +5,4 @@ resources:
   - weave-gitops.yaml
   - react-app.yaml
   - kiali.yaml
-  - sqs-app.yaml
+  # - sqs-app.yaml
