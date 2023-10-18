@@ -52,5 +52,5 @@ spec:
     #     - path: /
     #       pathType: Prefix
   interval: 2m0s
-  releaseName: podinfo
-  targetNamespace: podinfo-frontend
+  releaseName: podinfo-frontend
+  targetNamespace: podinfo
