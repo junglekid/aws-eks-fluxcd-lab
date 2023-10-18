@@ -28,4 +28,7 @@ spec:
             value: {{ $values.sqsQueueName }}
           - name: SLEEP_WAIT
             value: {{ $values.sleepWait}}
+        ports:
+        - containerPort: {{ $values.containerPort }}
+          protocol: TCP
 {{ end }}

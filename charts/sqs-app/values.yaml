@@ -1,6 +1,7 @@
 deployments:
 
   sqs-producer:
+    containerPort: 8080
     image: 704855531002.dkr.ecr.us-west-2.amazonaws.com/eks-fluxcd-lab-sqs-producer:latest
     serviceAccountName: sa-aws-sqs
     sqsQueueName: eks-fluxcd-lab-sqs-queue
@@ -8,8 +9,26 @@ deployments:
     replicas: 1
 
   sqs-consumer:
+    containerPort: 8080
     image: 704855531002.dkr.ecr.us-west-2.amazonaws.com/eks-fluxcd-lab-sqs-consumer:latest
     serviceAccountName: sa-aws-sqs
     sqsQueueName: eks-fluxcd-lab-sqs-queue
     sleepWait: 10
     replicas: 1
+
+service:
+  sqs-producer:
+    name: sqs-producer
+    port: 80
+    type: ClusterIP
+    ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 8080
+
+ingress:
+  sqs-producer:
+    name: ingress-sqs-producer
+    certificateArn:
+    dnsHostname:
