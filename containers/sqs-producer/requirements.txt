@@ -1,0 +1,4 @@
+flask==3.0.0
+logger==1.4
+gunicorn==21.2.0
+wheel==0.41.2
