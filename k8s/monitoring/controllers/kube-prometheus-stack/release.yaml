@@ -24,14 +24,15 @@ spec:
   values:
     alertmanager:
       enabled: true
-      storage:
-        volumeClaimTemplate:
-          spec:
-            storageClassName: ebs-sc
-            accessModes: ["ReadWriteOnce"]
-            resources:
-              requests:
-                storage: 50Gi
+      alertmanagerSpec:
+        storage:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: ebs-sc
+              accessModes: ["ReadWriteOnce"]
+              resources:
+                requests:
+                  storage: 50Gi
     prometheus:
       prometheusSpec:
         replicas: 1
@@ -63,14 +64,15 @@ spec:
           - source_labels: [__meta_kubernetes_pod_container_port_name]
             action: keep
             regex: '.*-envoy-prom'
+        prometheusSpec:
         storageSpec:
-        volumeClaimTemplate:
-          spec:
-            storageClassName: ebs-sc
-            accessModes: ["ReadWriteOnce"]
-            resources:
-              requests:
-                storage: 200Gi
+          volumeClaimTemplate:
+            spec:
+              storageClassName: ebs-sc
+              accessModes: ["ReadWriteOnce"]
+              resources:
+                requests:
+                  storage: 200Gi
     defaultRules:
       create: true
       rules:
