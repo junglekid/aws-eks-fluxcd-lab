@@ -21,7 +21,11 @@ spec:
     serviceAccount:
       create: true
       annotations:
-        eks.amazonaws.com/role-arn: sa-external-dnsarn:aws:iam::704855531002:role/sa-eks-fluxcd-lab-sqs-keda
+        eks.amazonaws.com/role-arn: arn:aws:iam::704855531002:role/sa-eks-fluxcd-lab-sqs-keda
   interval: 2m0s
   releaseName: keda
   targetNamespace: keda
+# podSecurityContext:
+#   fsGroup: 1001
+#   runAsGroup: 1001
+#   runAsUser: 1001
