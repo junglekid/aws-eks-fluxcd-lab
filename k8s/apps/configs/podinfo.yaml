@@ -48,11 +48,11 @@ spec:
   http:
   - route:
     - destination:
-        host: podinfo
-        # host: frontend
+        # host: podinfo
+        host: podinfo-frontend
         port:
-          number: 9898
-          # number: 80
+          # number: 9898
+          number: 80
     match:
     - uri:
         prefix: /
