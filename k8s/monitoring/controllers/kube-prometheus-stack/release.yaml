@@ -64,15 +64,15 @@ spec:
           - source_labels: [__meta_kubernetes_pod_container_port_name]
             action: keep
             regex: '.*-envoy-prom'
-        prometheusSpec:
-          storageSpec:
-            volumeClaimTemplate:
-              spec:
-                storageClassName: ebs-sc
-                accessModes: ["ReadWriteOnce"]
-                resources:
-                  requests:
-                    storage: 200Gi
+      thanosRulerSpec:
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: ebs-sc
+              accessModes: ["ReadWriteOnce"]
+              resources:
+                requests:
+                  storage: 200Gi
     defaultRules:
       create: true
       rules:
