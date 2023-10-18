@@ -357,7 +357,7 @@ resource "kubernetes_namespace" "keda" {
   }
 }
 
-resource "kubernetes_storage_class" "example" {
+resource "kubernetes_storage_class" "ebs" {
   metadata {
     name = "ebs-sc"
   }
