@@ -22,10 +22,10 @@ metadata:
   namespace: podinfo
 spec:
   ports:
-  - name: redis
+  - name: tcp
     port: 6379
     protocol: TCP
-    targetPort: redis
+    targetPort: 6379
   selector:
     app: podinfo-redis
   type: ClusterIP
