@@ -11,7 +11,7 @@ spec:
       version: ">=1.0.0"
       sourceRef:
         kind: GitRepository
-        name: react-app
+        name: aws-eks-fluxcd-lab
         namespace: flux-system
   values:
     deployment:

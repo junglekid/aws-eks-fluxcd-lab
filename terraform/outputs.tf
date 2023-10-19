@@ -99,6 +99,22 @@ output "kiali_acm_certificate_arn" {
   value = aws_acm_certificate_validation.kiali.certificate_arn
 }
 
+output "bookinfo_domain_name" {
+  value = local.bookinfo_domain_name
+}
+
+output "bookinfo_acm_certificate_arn" {
+  value = aws_acm_certificate_validation.bookinfo.certificate_arn
+}
+
+output "sqs_app_domain_name" {
+  value = local.sqs_app_domain_name
+}
+
+output "sqs_app_acm_certificate_arn" {
+  value = aws_acm_certificate_validation.sqs_app.certificate_arn
+}
+
 output "sqs_queue_url" {
   value = module.sqs.queue_url
 }

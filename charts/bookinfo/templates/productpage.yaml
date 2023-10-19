@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "bookinfo.fullname" . }}-productpage
+  labels:
+    app: productpage
+    service: productpage
+  {{- include "bookinfo.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.productpage.type }}
+  selector:
+    app: productpage
+  {{- include "bookinfo.selectorLabels" . | nindent 4 }}
+  ports:
+	{{- .Values.productpage.ports | toYaml | nindent 2 -}}

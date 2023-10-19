@@ -35,11 +35,14 @@ locals {
 
   # ACM and Route53 Configuration
   public_domain            = "dallin.brewsentry.com"              # Update with your root domain
+  base_domain_name         = "dallin.brewsentry.com"              # Update with your root domain
   react_app_domain_name    = "react-app.dallin.brewsentry.com"    # Update with your custom domain name
   weave_gitops_domain_name = "weave-gitops.dallin.brewsentry.com" # Update with your custom domain name
   podinfo_domain_name      = "podinfo.dallin.brewsentry.com"      # Update with your custom domain name
   grafana_domain_name      = "grafana.dallin.brewsentry.com"      # Update with your custom domain name
   kiali_domain_name        = "kiali.dallin.brewsentry.com"        # Update with your custom domain name
+  bookinfo_domain_name     = "bookinfo.dallin.brewsentry.com"     # Update with your custom domain name
+  sqs_app_domain_name      = "sqs-app.dallin.brewsentry.com"     # Update with your custom domain name
   route53_zone_id          = data.aws_route53_zone.public_domain.zone_id
   route53_zone_arn         = data.aws_route53_zone.public_domain.arn
 }

@@ -1,0 +1,255 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "bookinfo.fullname" . }}-details-v1
+  labels:
+    app: details
+    version: v1
+  {{- include "bookinfo.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.detailsV1.replicas }}
+  selector:
+    matchLabels:
+      app: details
+      version: v1
+    {{- include "bookinfo.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app: details
+        version: v1
+      {{- include "bookinfo.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - env:
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.detailsV1.details.image.repository }}:{{ .Values.detailsV1.details.image.tag
+          | default .Chart.AppVersion }}
+        imagePullPolicy: {{ .Values.detailsV1.details.imagePullPolicy }}
+        name: details
+        ports:
+        - containerPort: 9080
+        resources: {}
+      serviceAccountName: {{ include "bookinfo.fullname" . }}-bookinfo-details
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "bookinfo.fullname" . }}-ratings-v1
+  labels:
+    app: ratings
+    version: v1
+  {{- include "bookinfo.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.ratingsV1.replicas }}
+  selector:
+    matchLabels:
+      app: ratings
+      version: v1
+    {{- include "bookinfo.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app: ratings
+        version: v1
+      {{- include "bookinfo.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - env:
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.ratingsV1.ratings.image.repository }}:{{ .Values.ratingsV1.ratings.image.tag
+          | default .Chart.AppVersion }}
+        imagePullPolicy: {{ .Values.ratingsV1.ratings.imagePullPolicy }}
+        name: ratings
+        ports:
+        - containerPort: 9080
+        resources: {}
+      serviceAccountName: {{ include "bookinfo.fullname" . }}-bookinfo-ratings
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "bookinfo.fullname" . }}-reviews-v1
+  labels:
+    app: reviews
+    version: v1
+  {{- include "bookinfo.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.reviewsV1.replicas }}
+  selector:
+    matchLabels:
+      app: reviews
+      version: v1
+    {{- include "bookinfo.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app: reviews
+        version: v1
+      {{- include "bookinfo.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - env:
+        - name: LOG_DIR
+          value: {{ quote .Values.reviewsV1.reviews.env.logDir }}
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.reviewsV1.reviews.image.repository }}:{{ .Values.reviewsV1.reviews.image.tag
+          | default .Chart.AppVersion }}
+        imagePullPolicy: {{ .Values.reviewsV1.reviews.imagePullPolicy }}
+        name: reviews
+        ports:
+        - containerPort: 9080
+        resources: {}
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmp
+        - mountPath: /opt/ibm/wlp/output
+          name: wlp-output
+      serviceAccountName: {{ include "bookinfo.fullname" . }}-bookinfo-reviews
+      volumes:
+      - emptyDir: {}
+        name: wlp-output
+      - emptyDir: {}
+        name: tmp
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "bookinfo.fullname" . }}-reviews-v2
+  labels:
+    app: reviews
+    version: v2
+  {{- include "bookinfo.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.reviewsV2.replicas }}
+  selector:
+    matchLabels:
+      app: reviews
+      version: v2
+    {{- include "bookinfo.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app: reviews
+        version: v2
+      {{- include "bookinfo.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - env:
+        - name: LOG_DIR
+          value: {{ quote .Values.reviewsV2.reviews.env.logDir }}
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.reviewsV2.reviews.image.repository }}:{{ .Values.reviewsV2.reviews.image.tag
+          | default .Chart.AppVersion }}
+        imagePullPolicy: {{ .Values.reviewsV2.reviews.imagePullPolicy }}
+        name: reviews
+        ports:
+        - containerPort: 9080
+        resources: {}
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmp
+        - mountPath: /opt/ibm/wlp/output
+          name: wlp-output
+      serviceAccountName: {{ include "bookinfo.fullname" . }}-bookinfo-reviews
+      volumes:
+      - emptyDir: {}
+        name: wlp-output
+      - emptyDir: {}
+        name: tmp
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "bookinfo.fullname" . }}-reviews-v3
+  labels:
+    app: reviews
+    version: v3
+  {{- include "bookinfo.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.reviewsV3.replicas }}
+  selector:
+    matchLabels:
+      app: reviews
+      version: v3
+    {{- include "bookinfo.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app: reviews
+        version: v3
+      {{- include "bookinfo.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - env:
+        - name: LOG_DIR
+          value: {{ quote .Values.reviewsV3.reviews.env.logDir }}
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.reviewsV3.reviews.image.repository }}:{{ .Values.reviewsV3.reviews.image.tag
+          | default .Chart.AppVersion }}
+        imagePullPolicy: {{ .Values.reviewsV3.reviews.imagePullPolicy }}
+        name: reviews
+        ports:
+        - containerPort: 9080
+        resources: {}
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmp
+        - mountPath: /opt/ibm/wlp/output
+          name: wlp-output
+      serviceAccountName: {{ include "bookinfo.fullname" . }}-bookinfo-reviews
+      volumes:
+      - emptyDir: {}
+        name: wlp-output
+      - emptyDir: {}
+        name: tmp
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "bookinfo.fullname" . }}-productpage-v1
+  labels:
+    app: productpage
+    version: v1
+  {{- include "bookinfo.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.productpageV1.replicas }}
+  selector:
+    matchLabels:
+      app: productpage
+      version: v1
+    {{- include "bookinfo.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app: productpage
+        version: v1
+      {{- include "bookinfo.selectorLabels" . | nindent 8 }}
+      annotations:
+        prometheus.io/path: /metrics
+        prometheus.io/port: "9080"
+        prometheus.io/scrape: "true"
+    spec:
+      containers:
+      - env:
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.productpageV1.productpage.image.repository }}:{{ .Values.productpageV1.productpage.image.tag
+          | default .Chart.AppVersion }}
+        imagePullPolicy: {{ .Values.productpageV1.productpage.imagePullPolicy }}
+        name: productpage
+        ports:
+        - containerPort: 9080
+        resources: {}
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmp
+      serviceAccountName: {{ include "bookinfo.fullname" . }}-bookinfo-productpage
+      volumes:
+      - emptyDir: {}
+        name: tmp
