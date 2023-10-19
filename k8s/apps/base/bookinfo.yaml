@@ -68,8 +68,6 @@ spec:
     matchLabels:
       app: details
       version: v1
-      app.kubernetes.io/name: details
-      app.kubernetes.io/version: v1
   template:
     metadata:
       labels:
@@ -135,8 +133,6 @@ spec:
     matchLabels:
       app: ratings
       version: v1
-      app.kubernetes.io/name: ratings
-    pp.kubernetes.io/version: v1
   template:
     metadata:
       labels:
@@ -202,8 +198,6 @@ spec:
     matchLabels:
       app: reviews
       version: v1
-      app.kubernetes.io/name: reviews
-      app.kubernetes.io/version: v1
   template:
     metadata:
       labels:
@@ -248,20 +242,20 @@ metadata:
   labels:
     app: reviews
     version: v2
+    app.kubernetes.io/name: reviews
+    app.kubernetes.io/version: v2
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: reviews
       version: v2
-      app.kubernetes.io/name: reviews
-      app.kubernetes.io/version: v2
   template:
     metadata:
       labels:
         app: reviews
         version: v2
-        app.kubernetes.io/name: reviews v2
+        app.kubernetes.io/name: reviews
         app.kubernetes.io/version: v2
     spec:
       serviceAccountName: bookinfo-reviews
@@ -308,8 +302,6 @@ spec:
     matchLabels:
       app: reviews
       version: v3
-      app.kubernetes.io/name: reviews
-      app.kubernetes.io/version: v3
   template:
     metadata:
       labels:
@@ -388,8 +380,6 @@ spec:
     matchLabels:
       app: productpage
       version: v1
-      app.kubernetes.io/name: productpage
-      app.kubernetes.io/version: v1
   template:
     metadata:
       annotations:
