@@ -60,17 +60,23 @@ metadata:
   labels:
     app: details
     version: v1
+    app.kubernetes.io/name: details
+    app.kubernetes.io/version: v1
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: details
       version: v1
+      app.kubernetes.io/name: details
+      app.kubernetes.io/version: v1
   template:
     metadata:
       labels:
         app: details
         version: v1
+        app.kubernetes.io/name: details
+        app.kubernetes.io/version: v1
     spec:
       serviceAccountName: bookinfo-details
       containers:
@@ -79,6 +85,13 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9080
+        resources:
+          limits:
+            cpu: "2"
+            memory: 1Gi
+          requests:
+            cpu: 100m
+            memory: 128Mi
 ---
 ##################################################################################################
 # Ratings service
@@ -114,17 +127,23 @@ metadata:
   labels:
     app: ratings
     version: v1
+    app.kubernetes.io/name: ratings
+    app.kubernetes.io/version: v1
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: ratings
       version: v1
+      app.kubernetes.io/name: ratings
+    pp.kubernetes.io/version: v1
   template:
     metadata:
       labels:
         app: ratings
         version: v1
+        app.kubernetes.io/name: ratings
+        app.kubernetes.io/version: v1
     spec:
       serviceAccountName: bookinfo-ratings
       containers:
@@ -133,6 +152,13 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9080
+        resources:
+          limits:
+            cpu: "2"
+            memory: 1Gi
+          requests:
+            cpu: 100m
+            memory: 128Mi
 ---
 ##################################################################################################
 # Reviews service
@@ -168,17 +194,23 @@ metadata:
   labels:
     app: reviews
     version: v1
+    app.kubernetes.io/name: reviews
+    app.kubernetes.io/version: v1
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: reviews
       version: v1
+      app.kubernetes.io/name: reviews
+      app.kubernetes.io/version: v1
   template:
     metadata:
       labels:
         app: reviews
         version: v1
+        app.kubernetes.io/name: reviews
+        app.kubernetes.io/version: v1
     spec:
       serviceAccountName: bookinfo-reviews
       containers:
@@ -190,6 +222,13 @@ spec:
           value: "/tmp/logs"
         ports:
         - containerPort: 9080
+        resources:
+          limits:
+            cpu: "2"
+            memory: 1Gi
+          requests:
+            cpu: 100m
+            memory: 128Mi
         volumeMounts:
         - name: tmp
           mountPath: /tmp
@@ -215,11 +254,15 @@ spec:
     matchLabels:
       app: reviews
       version: v2
+      app.kubernetes.io/name: reviews
+      app.kubernetes.io/version: v2
   template:
     metadata:
       labels:
         app: reviews
         version: v2
+        app.kubernetes.io/name: reviews v2
+        app.kubernetes.io/version: v2
     spec:
       serviceAccountName: bookinfo-reviews
       containers:
@@ -231,6 +274,13 @@ spec:
           value: "/tmp/logs"
         ports:
         - containerPort: 9080
+        resources:
+          limits:
+            cpu: "2"
+            memory: 1Gi
+          requests:
+            cpu: 100m
+            memory: 128Mi
         volumeMounts:
         - name: tmp
           mountPath: /tmp
@@ -250,17 +300,23 @@ metadata:
   labels:
     app: reviews
     version: v3
+    app.kubernetes.io/name: reviews
+    app.kubernetes.io/version: v3
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: reviews
       version: v3
+      app.kubernetes.io/name: reviews
+      app.kubernetes.io/version: v3
   template:
     metadata:
       labels:
         app: reviews
         version: v3
+        app.kubernetes.io/name: reviews
+        app.kubernetes.io/version: v3
     spec:
       serviceAccountName: bookinfo-reviews
       containers:
@@ -272,6 +328,13 @@ spec:
           value: "/tmp/logs"
         ports:
         - containerPort: 9080
+        resources:
+          limits:
+            cpu: "2"
+            memory: 1Gi
+          requests:
+            cpu: 100m
+            memory: 128Mi
         volumeMounts:
         - name: tmp
           mountPath: /tmp
@@ -317,12 +380,16 @@ metadata:
   labels:
     app: productpage
     version: v1
+    app.kubernetes.io/name: productpage
+    app.kubernetes.io/version: v1
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: productpage
       version: v1
+      app.kubernetes.io/name: productpage
+      app.kubernetes.io/version: v1
   template:
     metadata:
       annotations:
@@ -332,6 +399,8 @@ spec:
       labels:
         app: productpage
         version: v1
+        app.kubernetes.io/name: productpage
+        app.kubernetes.io/version: v1
     spec:
       serviceAccountName: bookinfo-productpage
       containers:
@@ -340,6 +409,13 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9080
+        resources:
+          limits:
+            cpu: "2"
+            memory: 1Gi
+          requests:
+            cpu: 100m
+            memory: 128Mi
         volumeMounts:
         - name: tmp
           mountPath: /tmp
