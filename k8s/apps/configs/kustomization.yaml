@@ -6,5 +6,4 @@ resources:
   - weave-gitops.yaml
   - kiali.yaml
   - bookinfo.yaml
-  # - sqs-app.yaml
-  # - sqs-app-keda.yaml
+  - sqs-app-keda.yaml
