@@ -14,13 +14,13 @@ spec:
         name: aws-eks-fluxcd-lab
         namespace: flux-system
   values:
-  deployment:
-    container:
-      image:
-        repository: 704855531002.dkr.ecr.us-west-2.amazonaws.com/eks-fluxcd-lab-sqs-consumer
-        tag: latest
-      sqsQueueName: eks-fluxcd-lab-sqs-queue
-    serviceAccountName: sa-aws-sqs
+    deployment:
+      container:
+        image:
+          repository: 704855531002.dkr.ecr.us-west-2.amazonaws.com/eks-fluxcd-lab-sqs-consumer
+          tag: latest
+        sqsQueueName: eks-fluxcd-lab-sqs-queue
+      serviceAccountName: sa-aws-sqs
   interval: 2m0s
   releaseName: sqs-consumer
   targetNamespace: sqs-app
