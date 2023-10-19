@@ -20,7 +20,7 @@ spec:
         memory: 128Mi
       limits:
         memory: 512Mi
-    cache: tcp://podinfo-frontend-redis:6379
+    cache: tcp://podinfo-redis:6379
     hpa:
       enabled: true
       maxReplicas: 10

@@ -25,9 +25,9 @@ spec:
       maxReplicas: 10
       cpu: 80
     backend: http://podinfo-backend:9898/echo
-    redis:
-      enabled: true
-    cache: tcp://podinfo-frontend-redis:6379
+    # redis:
+    #   enabled: true
+    cache: tcp://podinfo-redis:6379
     replicaCount: 2
     service:
       externalPort: 80
