@@ -8,5 +8,5 @@ resources:
   - weave-gitops.yaml
   - react-app.yaml
   - kiali.yaml
-  - bookinfo.yaml
+  # - bookinfo.yaml
   # - sqs-app.yaml
