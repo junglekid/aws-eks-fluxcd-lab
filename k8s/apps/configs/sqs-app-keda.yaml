@@ -6,7 +6,7 @@ metadata:
  namespace: sqs-app
 spec:
   minReplicaCount: 0
-  maxReplicaCount: 100
+  maxReplicaCount: 20
   pollingInterval: 15
   cooldownPeriod:  30
   # fallback:
