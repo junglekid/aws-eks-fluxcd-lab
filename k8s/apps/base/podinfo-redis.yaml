@@ -18,7 +18,7 @@ kind: Service
 metadata:
   labels:
     app: podinfo-redis
-  name: redis-cache
+  name: podinfo-redis
   namespace: podinfo
 spec:
   ports:
@@ -27,7 +27,7 @@ spec:
     protocol: TCP
     targetPort: redis
   selector:
-    app: redis-cache
+    app: podinfo-redis
   type: ClusterIP
 ---
 apiVersion: apps/v1
@@ -36,12 +36,12 @@ metadata:
   labels:
     env: dev
     instance: webapp
-  name: redis-cache
+  name: podinfo-redis
   namespace: podinfo
 spec:
   selector:
     matchLabels:
-      app: redis-cache
+      app: podinfo-redis
   template:
     metadata:
       labels:
