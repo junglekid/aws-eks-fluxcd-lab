@@ -59,6 +59,6 @@ spec:
         prefix: /api/v1/products
     route:
     - destination:
-        host: productpage
+        host: bookinfo-productpage
         port:
           number: 9080
