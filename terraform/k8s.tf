@@ -30,10 +30,6 @@ resource "kubernetes_namespace" "sqs_app" {
       name = "sqs-app"
     }
 
-    labels = {
-      istio-injection = "enabled"
-    }
-
     name = "sqs-app"
   }
 }
@@ -55,8 +51,6 @@ resource "kubernetes_service_account" "sqs_service_account" {
     aws_eks_node_group.eks
   ]
 }
-
-
 
 ### Keda
 resource "kubernetes_namespace" "keda" {

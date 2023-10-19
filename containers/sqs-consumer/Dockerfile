@@ -7,6 +7,8 @@ COPY . .
 ARG USER=sqs_consumer
 ARG GROUP=sqs_consumer
 
+USER root
+
 RUN apt-get update \
     && apt-get upgrade -y \
 	&& rm -rf /var/lib/apt/lists/* \

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.service.name | quote }}
+  labels:
+    {{- include "sqs-producer.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    app: sqs-producer
+    {{- include "sqs-producer.selectorLabels" . | nindent 4 }}
+  ports:
+	{{- .Values.service.ports | toYaml | nindent 2 -}}

@@ -1,0 +1,32 @@
+deployment:
+  name: sqs-producer
+  container:
+    image:
+      repository:
+      tag: latest
+    imagePullPolicy: Always
+    containerPort: 8080
+    sqsQueueName:
+    sleepWait: 10
+    resources:
+        requests:
+          cpu: 500m
+          memory: 512Mi
+  replicas: 1
+  serviceAccountName:
+
+service:
+  name: sqs-producer
+  type: ClusterIP
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+
+ingress:
+  enabled: false
+  name: sqs-producer
+  port: 80
+  dnsHostname:
+  annotations: {}

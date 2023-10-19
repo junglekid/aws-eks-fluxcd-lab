@@ -26,6 +26,8 @@ To build the Docker image, run the following command:
 cd ..
 docker build --platform linux/amd64 --no-cache --pull -t ${ECR_SQS_CONSUMER_REPO}:latest ./containers/sqs-consumer
 docker build --platform linux/amd64 --no-cache --pull -t ${ECR_SQS_PRODUCER_REPO}:latest ./containers/sqs-producer
+
+docker build --no-cache --pull -t sqs-consumer:latest ./sqs-consumer
 ```
 
 ## Push the Docker Images to Amazon ECR

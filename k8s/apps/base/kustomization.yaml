@@ -9,4 +9,5 @@ resources:
   - react-app.yaml
   - kiali.yaml
   - bookinfo.yaml
-  # - sqs-app.yaml
+  - sqs-consumer.yaml
+  - sqs-producer.yaml

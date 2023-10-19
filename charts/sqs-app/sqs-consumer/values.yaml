@@ -1,0 +1,16 @@
+deployment:
+  name: sqs-consumer
+  container:
+    image:
+      repository:
+      tag: latest
+    imagePullPolicy: Always
+    containerPort: 8080
+    sqsQueueName:
+    sleepWait: 10
+    resources:
+        requests:
+          cpu: 500m
+          memory: 512Mi
+  replicas: 1
+  serviceAccountName:

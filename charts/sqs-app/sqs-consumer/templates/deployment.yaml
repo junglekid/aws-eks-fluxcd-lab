@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.deployment.name | quote }}
+  labels:
+    app: {{ .Values.deployment.name | quote }}
+    {{- include "sqs-consumer.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.deployment.name | quote }}
+      {{- include "sqs-consumer.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.deployment.name | quote }}
+        {{- include "sqs-consumer.selectorLabels" . | nindent 8 }}
+    spec:
+      serviceAccountName: {{ .Values.deployment.serviceAccountName }}
+      containers:
+      - image: {{ .Values.deployment.container.image.repository }}:{{ .Values.deployment.container.image.tag }}
+        imagePullPolicy: {{ .Values.deployment.container.imagePullPolicy }}
+        name: {{ .Values.deployment.name | quote }}
+        env:
+        - name: SQS_QUEUE_NAME
+          value: {{ .Values.deployment.container.sqsQueueName | quote }}
+        - name: SLEEP_WAIT
+          value: {{ .Values.deployment.container.sleepWait | quote }}
+        ports:
+        - containerPort: {{ .Values.deployment.container.containerPort }}
+          protocol: TCP
+        resources:
+        {{- toYaml .Values.deployment.container.resources | nindent 12 }}

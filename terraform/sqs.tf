@@ -23,8 +23,9 @@ resource "aws_iam_policy" "sqs" {
         Action = [
           "sqs:DeleteMessage",
           "sqs:SendMessage",
-          "sqs:CreateQueue",
-          "sqs:GetQueueAttributes"
+          "sqs:GetQueueAttributes",
+          "sqs:GetQueueUrl",
+          "sqs:ReceiveMessage"
         ]
         Effect = "Allow",
         Resource = [
