@@ -10,4 +10,4 @@ resources:
   - kiali.yaml
   - bookinfo.yaml
   - sqs-consumer.yaml
-  # - sqs-producer.yaml
+  - sqs-producer.yaml
