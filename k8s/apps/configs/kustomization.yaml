@@ -4,6 +4,6 @@ resources:
   - podinfo.yaml
   - react-app.yaml
   - weave-gitops.yaml
-  - kiali.yaml
-  - bookinfo.yaml
+  # - kiali.yaml
+  # - bookinfo.yaml
   - sqs-app-keda.yaml
