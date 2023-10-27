@@ -4,5 +4,5 @@ resources:
   # - podinfo.yaml
   # - weave-gitops.yaml
   # - react-app.yaml
-  - sqs-consumer.yaml
-  - sqs-producer.yaml
+  # - sqs-consumer.yaml
+  # - sqs-producer.yaml
