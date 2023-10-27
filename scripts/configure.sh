@@ -32,7 +32,6 @@ AWS_ACM_REACT_APP_ARN=$(terraform output -raw react_app_acm_certificate_arn)
 REACT_APP_GITHUB_URL="https://github.com/junglekid/aws-eks-fluxcd-lab"
 ECR_REPO=$(terraform output -raw ecr_repo_url)
 
-
 echo ""
 echo "Configuring Apps managed by FluxCD..."
 echo ""
