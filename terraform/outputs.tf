@@ -3,6 +3,11 @@ output "aws_region" {
   value = local.aws_region
 }
 
+# Output Domain Filter for External DNS
+output "domain_filter" {
+  value = local.public_domain
+}
+
 # Output EKS Cluster Name
 output "eks_cluster_name" {
   value = module.eks.cluster_name
@@ -15,14 +20,6 @@ output "eks_cluster_endpoint" {
 # Output ECR Repo
 output "ecr_repo_url" {
   value = module.ecr.repository_url
-}
-
-output "ecr_sqs_consumer_repo_url" {
-  value = module.ecr_sqs_consumer.repository_url
-}
-
-output "ecr_sqs_producer_repo_url" {
-  value = module.ecr_sqs_producer.repository_url
 }
 
 # Output EKS Service Account for AWS Load Balancer Controller
@@ -43,27 +40,13 @@ output "eks_sa_external_dns_iam_role_arn" {
   value = module.external_dns_irsa_role.iam_role_arn
 }
 
-# Output EKS Service Account for External DNS
+# Output EKS Service Account for Cluster AutoScaler
 output "eks_sa_cluster_autoscaler_name" {
   value = kubernetes_service_account.cluster_autoscaler_service_account.metadata[0].name
 }
 
 output "eks_sa_cluster_autoscaler_iam_role_arn" {
   value = module.cluster_autoscaler_irsa_role.iam_role_arn
-}
-
-# Output Domain Filter for External DNS
-output "domain_filter" {
-  value = local.public_domain
-}
-
-# Weave Gitops Outputs
-output "weave_gitops_domain_name" {
-  value = local.weave_gitops_domain_name
-}
-
-output "weave_gitops_acm_certificate_arn" {
-  value = aws_acm_certificate_validation.weave_gitops.certificate_arn
 }
 
 # Podinfo Outputs
@@ -75,6 +58,7 @@ output "podinfo_acm_certificate_arn" {
   value = aws_acm_certificate_validation.podinfo.certificate_arn
 }
 
+# React App Outputs
 output "react_app_domain_name" {
   value = local.react_app_domain_name
 }
@@ -83,54 +67,11 @@ output "react_app_acm_certificate_arn" {
   value = aws_acm_certificate_validation.react_app.certificate_arn
 }
 
-output "grafana_domain_name" {
-  value = local.grafana_domain_name
+# Weave Gitops Outputs
+output "weave_gitops_domain_name" {
+  value = local.weave_gitops_domain_name
 }
 
-output "grafana_acm_certificate_arn" {
-  value = aws_acm_certificate_validation.grafana.certificate_arn
-}
-
-output "kiali_domain_name" {
-  value = local.kiali_domain_name
-}
-
-output "kiali_acm_certificate_arn" {
-  value = aws_acm_certificate_validation.kiali.certificate_arn
-}
-
-output "bookinfo_domain_name" {
-  value = local.bookinfo_domain_name
-}
-
-output "bookinfo_acm_certificate_arn" {
-  value = aws_acm_certificate_validation.bookinfo.certificate_arn
-}
-
-output "sqs_app_domain_name" {
-  value = local.sqs_app_domain_name
-}
-
-output "sqs_app_acm_certificate_arn" {
-  value = aws_acm_certificate_validation.sqs_app.certificate_arn
-}
-
-output "sqs_queue_url" {
-  value = module.sqs.queue_url
-}
-
-output "sqs_queue_arn" {
-  value = module.sqs.queue_arn
-}
-
-output "sqs_queue_name" {
-  value = module.sqs.queue_name
-}
-
-output "route53_zone_arn" {
-  value = local.route53_zone_arn
-}
-
-output "eks_sqs_keda_irsa_role" {
-  value = module.sqs_keda_irsa_role.iam_role_arn
+output "weave_gitops_acm_certificate_arn" {
+  value = aws_acm_certificate_validation.weave_gitops.certificate_arn
 }

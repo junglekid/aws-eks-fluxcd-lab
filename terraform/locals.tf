@@ -18,10 +18,6 @@ locals {
 
   # ECR Configuration
   ecr_repo_name     = "eks-fluxcd-lab-react-app"
-  ecr_sqs_repo_name = "eks-fluxcd-lab-sqs"
-
-  # SQS Configuration
-  sqs_name = "eks-fluxcd-lab-sqs"
 
   # EKS Configuration
   eks_cluster_name                            = "eks-fluxcd-lab"
@@ -30,19 +26,11 @@ locals {
   eks_alb_service_account_name                = "sa-aws-load-balancer-controller"
   eks_external_dns_service_account_name       = "sa-external-dns"
   eks_cluster_autoscaler_service_account_name = "sa-cluster-autoscaler"
-  eks_sqs_service_account_name                = "sa-aws-sqs"
-  eks_cert_manager_service_account_name       = "sa-cert-manager"
 
   # ACM and Route53 Configuration
   public_domain            = "dallin.brewsentry.com"              # Update with your root domain
-  base_domain_name         = "dallin.brewsentry.com"              # Update with your root domain
   react_app_domain_name    = "react-app.dallin.brewsentry.com"    # Update with your custom domain name
   weave_gitops_domain_name = "weave-gitops.dallin.brewsentry.com" # Update with your custom domain name
   podinfo_domain_name      = "podinfo.dallin.brewsentry.com"      # Update with your custom domain name
-  grafana_domain_name      = "grafana.dallin.brewsentry.com"      # Update with your custom domain name
-  kiali_domain_name        = "kiali.dallin.brewsentry.com"        # Update with your custom domain name
-  bookinfo_domain_name     = "bookinfo.dallin.brewsentry.com"     # Update with your custom domain name
-  sqs_app_domain_name      = "sqs-app.dallin.brewsentry.com"     # Update with your custom domain name
   route53_zone_id          = data.aws_route53_zone.public_domain.zone_id
-  route53_zone_arn         = data.aws_route53_zone.public_domain.arn
 }
