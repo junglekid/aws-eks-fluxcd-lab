@@ -23,18 +23,15 @@ SA_EXTERNAL_DNS_NAME=$(terraform output -raw eks_sa_external_dns_name)
 SA_EXTERNAL_DNS_IAM_ROLE_ARN=$(terraform output -raw eks_sa_external_dns_iam_role_arn)
 SA_CLUSTER_AUTOSCALER_NAME=$(terraform output -raw eks_sa_cluster_autoscaler_name)
 SA_CLUSTER_AUTOSCALER_IAM_ROLE_ARN=$(terraform output -raw eks_sa_cluster_autoscaler_iam_role_arn)
-SA_AWS_EBS_CSI_NAME=$(terraform output -raw eks_sa_ebs_csi_name)
-SA_AWS_EBS_CSI_IAM_ROLE_ARN=$(terraform output -raw eks_sa_ebs_csi_iam_role_arn)
 AWS_WEAVE_GITOPS_DOMAIN_NAME=$(terraform output -raw weave_gitops_domain_name)
 AWS_ACM_WEAVE_GITOPS_ARN=$(terraform output -raw weave_gitops_acm_certificate_arn)
 AWS_PODINFO_DOMAIN_NAME=$(terraform output -raw podinfo_domain_name)
 AWS_ACM_PODINFO_ARN=$(terraform output -raw podinfo_acm_certificate_arn)
-AWS_GRAFANA_DOMAIN_NAME=$(terraform output -raw grafana_domain_name)
-AWS_ACM_GRAFANA_ARN=$(terraform output -raw grafana_acm_certificate_arn)
 AWS_REACT_APP_DOMAIN_NAME=$(terraform output -raw react_app_domain_name)
 AWS_ACM_REACT_APP_ARN=$(terraform output -raw react_app_acm_certificate_arn)
 REACT_APP_GITHUB_URL="https://github.com/junglekid/aws-eks-fluxcd-lab"
 ECR_REPO=$(terraform output -raw ecr_repo_url)
+
 
 echo ""
 echo "Configuring Apps managed by FluxCD..."
@@ -76,31 +73,6 @@ replace_in_file 's|SA_CLUSTER_AUTOSCALER_IAM_ROLE_ARN|'"$SA_CLUSTER_AUTOSCALER_I
 replace_in_file 's|AWS_REGION|'"$AWS_REGION"'|g' ./k8s/infrastructure/addons/cluster-autoscaler.yaml
 replace_in_file 's|EKS_CLUSTER_NAME|'"$EKS_CLUSTER_NAME"'|g' ./k8s/infrastructure/addons/cluster-autoscaler.yaml
 
-cp -f ./k8s/templates/infrastructure/addons/aws-ebs-csi-driver.yaml ./k8s/infrastructure/addons/aws-ebs-csi-driver.yaml
-replace_in_file 's|SA_AWS_EBS_CSI_NAME|'"$SA_AWS_EBS_CSI_NAME"'|g' ./k8s/infrastructure/addons/aws-ebs-csi-driver.yaml
-replace_in_file 's|SA_AWS_EBS_CSI_IAM_ROLE_ARN|'"$SA_AWS_EBS_CSI_IAM_ROLE_ARN"'|g' ./k8s/infrastructure/addons/aws-ebs-csi-driver.yaml
-replace_in_file 's|AWS_REGION|'"$AWS_REGION"'|g' ./k8s/infrastructure/addons/aws-ebs-csi-driver.yaml
-replace_in_file 's|EKS_CLUSTER_NAME|'"$EKS_CLUSTER_NAME"'|g' ./k8s/infrastructure/addons/aws-ebs-csi-driver.yaml
-
-echo "Downloading Istio Dashboards for Grafana..."
-curl -L -sS -o ./k8s/monitoring/configs/dashboards/istio/istio-extension-dashboard.json \
- https://raw.githubusercontent.com/istio/istio/master/manifests/addons/dashboards/istio-extension-dashboard.json
-
-curl -L -sS -o ./k8s/monitoring/configs/dashboards/istio/istio-mesh-dashboard.json \
-  https://raw.githubusercontent.com/istio/istio/master/manifests/addons/dashboards/istio-mesh-dashboard.json
-
-curl -L -sS -o ./k8s/monitoring/configs/dashboards/istio/istio-performance-dashboard.json \
-  https://raw.githubusercontent.com/istio/istio/master/manifests/addons/dashboards/istio-performance-dashboard.json
-
-curl -L -sS -o ./k8s/monitoring/configs/dashboards/istio/istio-service-dashboard.json \
-  https://raw.githubusercontent.com/istio/istio/master/manifests/addons/dashboards/istio-service-dashboard.json
-
-curl -L -sS -o ./k8s/monitoring/configs/dashboards/istio/istio-workload-dashboard.json \
-  https://raw.githubusercontent.com/istio/istio/master/manifests/addons/dashboards/istio-workload-dashboard.json
-
-curl -L -sS -o ./k8s/monitoring/configs/dashboards/istio/pilot-dashboard.json \
-  https://raw.githubusercontent.com/istio/istio/master/manifests/addons/dashboards/pilot-dashboard.json
-
 echo ""
 echo "Pushing changes to Git repository..."
 echo ""
@@ -112,13 +84,7 @@ git add ./k8s/apps/sources/react-app.yaml
 git add ./k8s/infrastructure/addons/aws-load-balancer-controller.yaml
 git add ./k8s/infrastructure/addons/external-dns.yaml
 git add ./k8s/infrastructure/addons/cluster-autoscaler.yaml
-git add ./k8s/infrastructure/addons/aws-ebs-csi-driver.yaml
-git add ./k8s/monitoring/configs/dashboards/istio/istio-extension-dashboard.json
-git add ./k8s/monitoring/configs/dashboards/istio/istio-mesh-dashboard.json
-git add ./k8s/monitoring/configs/dashboards/istio/istio-performance-dashboard.json
-git add ./k8s/monitoring/configs/dashboards/istio/istio-service-dashboard.json
-git add ./k8s/monitoring/configs/dashboards/istio/istio-workload-dashboard.json
-git add ./k8s/monitoring/configs/dashboards/istio/pilot-dashboard.json
+
 git commit -m "Updating Apps"
 git push &> /dev/null
 
