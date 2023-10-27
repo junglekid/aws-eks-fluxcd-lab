@@ -1,5 +1,0 @@
-sqs-docker
-__pycache__
-.DS_Store
-.dockerignore
-Dockerfile
